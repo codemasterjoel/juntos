@@ -25,6 +25,7 @@ class CreateUsersTable extends Migration
             $table->foreignId('consejo_comunal_id')->nullable()->references('id')->on('consejo_comunals')->onDelete('cascade')->onUpdate('cascade');
             $table->boolean('is_active')->default(true);
             $table->string('especializacion')->nullable();
+            $table->string('role')->default('paciente'); // 'admin', 'doctor', 'paciente'
             $table->rememberToken();
             $table->timestamps();
         });

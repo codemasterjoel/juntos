@@ -5,6 +5,10 @@
                 <div class="col-xl-4 col-lg-5 col-md-6 d-flex flex-column mx-auto">
                     <div class="card card-plain mt-8">
                         <div class="card-header pb-0 text-left bg-transparent">
+                            <img src="{{asset('assets/img/logo-ct.png')}}" class="navbar-brand-img w-95">
+                        </div>
+
+                        <div class="card-header pb-0 text-left bg-transparent">
                             <h3 class="font-weight-bolder text-center text-info text-gradient">{{ __('INGRESAR') }}</h3>
                         </div>
                         <div class="card-body">

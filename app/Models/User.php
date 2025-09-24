@@ -22,4 +22,16 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+    public function estado()
+    {
+        return $this->belongsTo(Estado::class);
+    }
+    public function municipio()
+    {
+        return $this->belongsTo(Municipio::class);
+    }
+    public function parroquia()
+    {
+        return $this->belongsTo(Parroquia::class);
+    }
 }
