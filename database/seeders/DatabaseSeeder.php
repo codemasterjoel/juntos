@@ -13,6 +13,7 @@ class DatabaseSeeder extends Seeder
     {
 
         $this->call([
+            PaisSeeder::class,
             EstadoSeeder::class,
             MunicipioSeeder::class,
             ParroquiaSeeder::class,

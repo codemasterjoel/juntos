@@ -34,4 +34,12 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Parroquia::class);
     }
+    public function comuna()
+    {
+        return $this->belongsTo(Comuna::class);
+    }
+    public function pais()
+    {
+        return $this->belongsTo(Pais::class, 'pais_id', 'id');
+    }
 }

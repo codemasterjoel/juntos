@@ -51,20 +51,20 @@
                             <div class="row">
                                 <div class="col-xl-3 col-lg-12 col-md-12 col-sm-12 mb-3">
                                     <label for="name">SEXO DE NACIMIENTO</label>
-                                    <select class="form-select" wire:model.live="comoSeEntero">
+                                    <select class="form-select" wire:model.live="sexo">
                                         <option selected>SELECCIONE</option>
-                                        <option value="MUJER">MUJER</option>
-                                        <option value="HOMBRE">HOMBRE</option>
-                                        <option value="INTERSEXUAL">INTERSEXUAL</option>
+                                        @foreach ($sexos as $item)
+                                            <option value="{{ $item->id }}">{{ $item->nombre }}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                                 <div class="col-xl-3 col-lg-12 col-md-12 col-sm-12 mb-3">
                                     <label for="comoSeEntero" >GÉNERO</label>
-                                    <select class="form-select" wire:model.live="comoSeEntero">
+                                    <select class="form-select" wire:model.live="genero">
                                         <option selected>SELECCIONE</option>
-                                        <option value="MUJER">FEMENINA</option>
-                                        <option value="HOMBRE">MASCULINO</option>
-                                        <option value="NO BINARIO/QUEER/GÉNERO FLUIDO">NO BINARIO/QUEER/GÉNERO FLUIDO</option>
+                                        @foreach ($generos as $item)
+                                            <option value="{{ $item->id }}">{{ $item->nombre }}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                                 <div class="col-xl-3 col-lg-12 col-md-12 col-sm-12 mb-3">
@@ -153,7 +153,19 @@
                             </div>
                             <!-- #region ESTADO-->
                             <div class="row">
-                                <div class="col-xl-4 col-sm-12 mb-3">
+                                <div class="col-xl-3 col-sm-12 mb-3">
+                                    <label for="pais">PAIS</label>
+                                    <div class="@error('pais') border border-danger rounded-3 @enderror">
+                                        <select class="form-select" aria-label="Default select example" wire:model.live="pais">
+                                            <option selected>SELECCIONE</option>
+                                            @foreach ($paises as $item)
+                                                <option value="{{ $item->id }}">{{ $item->nombre }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    @error('pais') <div class="text-danger">{{ $message }}</div> @enderror
+                                </div>
+                                <div class="col-xl-3 col-sm-12 mb-3">
                                     <label for="estado">ESTADO</label>
                                     <div class="@error('estado') border border-danger rounded-3 @enderror">
                                         <select class="form-select" aria-label="Default select example" wire:model.live="estado">
@@ -167,7 +179,7 @@
                                 </div>
                                 <!-- #region MUNICIPIOS-->
                                     @if (!is_null($municipios))
-                                        <div class="col-xl-4 col-sm-12 mb-3">
+                                        <div class="col-xl-3 col-sm-12 mb-3">
                                             <label for="municipio">MUNICIPIO</label>
                                             <div class="@error('municipio') border border-danger rounded-3 @enderror">
                                                 <select class="form-select" aria-label="Default select example" wire:model.live="municipio">
@@ -182,7 +194,7 @@
                                     @endif
                                 <!-- #region PARROQUIAS-->
                                     @if (!is_null($parroquias))
-                                        <div class="col-xl-4 col-sm-12 mb-3">
+                                        <div class="col-xl-3 col-sm-12 mb-3">
                                             <label for="parroquia">PARROQUIA</label>
                                             <div class="@error('parroquia') border border-danger rounded-3 @enderror">
                                                 <select class="form-select" aria-label="Default select example" wire:model.live="parroquia">
