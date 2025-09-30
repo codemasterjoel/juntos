@@ -10,8 +10,10 @@ class SexoSeeder extends Seeder
 {
     public function run(): void
     {
-        Sexo::created(['nombre' => 'MUJER']);
-        Sexo::created(['nombre' => 'HOMBRE']);
-        Sexo::created(['nombre' => 'INTERSEXUAL']);
+        Sexo::insert([
+            ['nombre' => 'MUJER'],
+            ['nombre' => 'HOMBRE'],
+            ['nombre' => 'INTERSEXUAL']
+        ]);
     }
 }

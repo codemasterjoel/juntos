@@ -14,7 +14,7 @@
               <div class="col-xl-12 col-lg-5 col-md-7 mx-auto">
                   <div class="card z-index-0">
                       <div class="card-body">
-                          <form wire:submit="register" action="#" method="POST" role="form text-left">
+                          <form wire:submit="register" action="#" enctype="multipart/form-data" method="POST" role="form text-left">
                             <div class="container">
                                 <div class="row justify-content-center">
                                     <div class="col-lg-5 text-center mx-auto">
@@ -24,34 +24,34 @@
                             </div>
                             <div class="row">
                                 <div class="col-xl-2 col-sm-12 mb-3">
-                                    <label for="name">CÉDULA</label>
+                                    <label for="cedula">CÉDULA</label>
                                     <div class="@error('cedula') border border-danger rounded-3  @enderror">
-                                        <input wire:model.live="cedula" type="number" class="form-control" placeholder="cédula" aria-label="cedula">
+                                        <input wire:model="cedula" type="number" class="form-control" placeholder="cédula" aria-label="cedula">
                                     </div>
                                 </div>
                                 <div class="col-xl-4 col-sm-12 mb-3">
-                                    <label for="name">NOMBRE Y APELLIDO</label>
+                                    <label for="nombre">NOMBRE Y APELLIDO</label>
                                     <div class="@error('nombre') border border-danger rounded-3  @enderror">
-                                        <input wire:model.live="nombre" type="text" class="form-control" placeholder="nombre">
+                                        <input wire:model="nombre" type="text" class="form-control" placeholder="nombre">
                                     </div>
                                 </div>
                                 <div class="col-xl-3 col-sm-12 mb-3">
-                                    <label for="name">NÚMERO DE CONTACTO</label>
-                                    <div class="@error('nombre') border border-danger rounded-3  @enderror">
-                                        <input wire:model.live="telefono" type="number" class="form-control" placeholder="telefono">
+                                    <label for="tlf_contacto">NÚMERO DE CONTACTO</label>
+                                    <div class="@error('tlf_contacto') border border-danger rounded-3  @enderror">
+                                        <input wire:model="tlf_contacto" type="number" class="form-control" placeholder="telefono">
                                     </div>
                                 </div>
                                 <div class="col-xl-3 col-sm-12 mb-3">
-                                    <label for="name">TELEFONO DE EMERGENCIA</label>
-                                    <div class="@error('nombre') border border-danger rounded-3  @enderror">
-                                        <input wire:model.live="telefonoEmergencia" type="number" class="form-control" placeholder="telefono de emergencia">
+                                    <label for="tlf_emergencia">TELEFONO DE EMERGENCIA</label>
+                                    <div class="@error('tlf_emergencia') border border-danger rounded-3  @enderror">
+                                        <input wire:model="tlf_emergencia" type="number" class="form-control" placeholder="telefono de emergencia">
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-xl-3 col-lg-12 col-md-12 col-sm-12 mb-3">
-                                    <label for="name">SEXO DE NACIMIENTO</label>
-                                    <select class="form-select" wire:model.live="sexo">
+                                    <label for="sexo">SEXO DE NACIMIENTO</label>
+                                    <select wire:model="sexo" class="form-select" id="sexo" name="sexo">
                                         <option selected>SELECCIONE</option>
                                         @foreach ($sexos as $item)
                                             <option value="{{ $item->id }}">{{ $item->nombre }}</option>
@@ -59,8 +59,8 @@
                                     </select>
                                 </div>
                                 <div class="col-xl-3 col-lg-12 col-md-12 col-sm-12 mb-3">
-                                    <label for="comoSeEntero" >GÉNERO</label>
-                                    <select class="form-select" wire:model.live="genero">
+                                    <label for="genero" >GÉNERO</label>
+                                    <select class="form-select" wire:model="genero" id="genero" name="genero">
                                         <option selected>SELECCIONE</option>
                                         @foreach ($generos as $item)
                                             <option value="{{ $item->id }}">{{ $item->nombre }}</option>
@@ -68,54 +68,31 @@
                                     </select>
                                 </div>
                                 <div class="col-xl-3 col-lg-12 col-md-12 col-sm-12 mb-3">
-                                    <label for="comoSeEntero" >FECHA NACIMIENTO</label>
-                                    <input type="date" name="fecha_nac" id="fecha_nac" class="form-control">
+                                    <label for="fechaNac" >FECHA NACIMIENTO</label>
+                                    <input wire:model.live="fechaNac" type="date" name="fechaNac" id="fechaNac" class="form-control">
                                 </div>
                                 <div class="col-xl-3 col-lg-12 col-md-12 col-sm-12 mb-3">
-                                    <label for="comoSeEntero" >EDAD</label>
-                                    <select class="form-select" wire:model.live="comoSeEntero">
-                                        <option selected>SELECCIONE</option>
-                                        <option value="15">15</option>
-                                        <option value="16">16</option>
-                                        <option value="17">17</option>
-                                        <option value="18">18</option>
-                                        <option value="19">19</option>
-                                        <option value="20">20</option>
-                                        <option value="21">21</option>
-                                        <option value="22">22</option>
-                                        <option value="23">23</option>
-                                        <option value="24">24</option>
-                                        <option value="25">25</option>
-                                        <option value="26">26</option>
-                                        <option value="27">27</option>
-                                        <option value="28">28</option>
-                                        <option value="29">29</option>
-                                        <option value="30">30</option>
-                                        <option value="31">31</option>
-                                        <option value="32">32</option>
-                                        <option value="33">33</option>
-                                        <option value="34">34</option>
-                                        <option value="35">35</option>
-                                    </select>
+                                    <label for="edad">EDAD</label>
+                                    <input wire:model="edad" type="integer" name="edad" id="edad" class="form-control">
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-xl-4 col-sm-12 mb-3">
-                                    <label for="name">CÉDULA REPRESENTANTE</label>
-                                    <div class="@error('cedula') border border-danger rounded-3  @enderror">
-                                        <input wire:model.live="cedula" type="number" class="form-control" placeholder="cédula" aria-label="cedula">
+                                    <label for="cedula_representante">CÉDULA REPRESENTANTE</label>
+                                    <div class="@error('cedula_representante') border border-danger rounded-3  @enderror">
+                                        <input wire:model="cedula_representante" type="number" class="form-control" placeholder="Cédula Representante" aria-label="cedula_representante">
                                     </div>
                                 </div>
                                 <div class="col-xl-4 col-sm-12 mb-3">
-                                    <label for="name">NOMBRE Y APELLIDO REPRESENTANTE</label>
-                                    <div class="@error('nombre') border border-danger rounded-3  @enderror">
-                                        <input wire:model.live="nombre" type="text" class="form-control" placeholder="nombre">
+                                    <label for="nombre_representante">NOMBRE Y APELLIDO REPRESENTANTE</label>
+                                    <div class="@error('nombre_representante') border border-danger rounded-3  @enderror">
+                                        <input wire:model="nombre_representante" type="text" class="form-control" placeholder="Nombre del Representante">
                                     </div>
                                 </div>
                                 <div class="col-xl-4 col-sm-12 mb-3">
-                                    <label for="name">NÚMERO DE CONTACTO DEL REPRESENTANTE</label>
-                                    <div class="@error('nombre') border border-danger rounded-3  @enderror">
-                                        <input wire:model.live="telefono" type="number" class="form-control" placeholder="telefono">
+                                    <label for="tlf_representante">NÚMERO DE CONTACTO DEL REPRESENTANTE</label>
+                                    <div class="@error('tlf_representante') border border-danger rounded-3  @enderror">
+                                        <input wire:model="tlf_representante" type="number" class="form-control" placeholder="Telefono Representante">
                                     </div>
                                 </div>
                             </div>
@@ -224,7 +201,7 @@
                                 @endif
                                 @if (!is_null($consejoComunales)) {{-- campo Parroquia --}}
                                     <div class="col-xl-6 col-lg-12 col-md-12 col-sm-12">
-                                        <span for="consejoComunal" >CONSEJO COMUNAL</span>
+                                        <span for="consejoComunal">CONSEJO COMUNAL</span>
                                         <select class="form-select" aria-label="Default select example" wire:model.live="consejoComunal">
                                             <option selected>SELECCIONE</option>
                                             @foreach ($consejoComunales as $item)
@@ -237,9 +214,9 @@
                             </div>
                             <div class="row">
                                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-3">
-                                    <label for="name">DIRECCIÓN</label>
+                                    <label for="direccion">DIRECCIÓN</label>
                                     <div class="@error('direccion') border border-danger rounded-3  @enderror">
-                                        <input wire:model.live="direccion" type="text" class="form-control" placeholder="direccion">
+                                        <input wire:model="direccion" type="text" class="form-control" placeholder="direccion">
                                     </div>
                                 </div>
                             </div>
@@ -253,102 +230,72 @@
                             <div class="row">
                                 <div class="col-xl-4 col-lg-12 col-md-12 col-sm-12 mb-3">
                                     <label for="comoSeEntero" >¿COMO TE ENTERASTE DE SIEMPRE JUNTOS?</label>
-                                    <select class="form-select" aria-label="Default select example" wire:model.live="comoSeEntero">
+                                    <select class="form-select" aria-label="Default select example" wire:model="comoSeEntero">
                                         <option selected>SELECCIONE</option>
-                                        <option value="GRAN MISION VUELTA LA PATRIA">GRAN MISION VUELTA LA PATRIA</option>
-                                        <option value="REDES SOCIALES">REDES SOCIALES</option>
-                                        <option value="RECOMENDACIÓN DE UN AMIGO">RECOMENDACIÓN DE UN AMIGO</option>
-                                        <option value="RECOMENDACIÓN DE ALGUN ESPECIALISTA">RECOMENDACIÓN DE ALGUN ESPECIALISTA</option>
-                                        <option value="ACTIVIDAD COMUNITARIA">ACTIVIDAD COMUNITARIA</option>
-                                        <option value="UNIVERSIDAD BOLIVARIANA DE VENEZUELA">UNIVERSIDAD BOLIVARIANA DE VENEZUELA</option>
-                                        <option value="GRAN MISIÓN VENEZUELA JOVEN">GRAN MISIÓN VENEZUELA JOVEN</option>
+                                        @foreach ($enteros as $item)
+                                            <option value="{{ $item->id }}">{{ $item->nombre }}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-3">
-                                    <label for="name">MODALIDAD EN QUE PUEDE RECIBIR LA ATENCIÓN</label>
-                                    <div class="@error('direccion') border border-danger rounded-3  @enderror">
+                                    <label for="modalidad">MODALIDAD EN QUE PUEDE RECIBIR LA ATENCIÓN</label>
+                                    <div class="@error('modalidad') border border-danger rounded-3  @enderror">
                                         <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+                                            <input wire:model="modalidad" class="form-check-input" type="radio" name="modalidad" id="inlineRadio1" value="1">
                                             <label class="form-check-label" for="inlineRadio1">PRESENCIAL</label>
                                         </div>
                                         <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+                                            <input wire:model="modalidad" class="form-check-input" type="radio" name="modalidad" id="inlineRadio2" value="2">
                                             <label class="form-check-label" for="inlineRadio2">ONLINE</label>
                                         </div>
                                         <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3">
+                                            <input wire:model="modalidad" class="form-check-input" type="radio" name="modalidad" id="inlineRadio3" value="3">
                                             <label class="form-check-label" for="inlineRadio3">AMBAS</label>
                                         </div>
                                         <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3">
-                                            <label class="form-check-label" for="inlineRadio3">PRESENCIAL EN GRUPO (VARIAS PERSONAS)</label>
+                                            <input wire:model="modalidad" class="form-check-input" type="radio" name="modalidad" id="inlineRadio4" value="4">
+                                            <label class="form-check-label" for="inlineRadio4">PRESENCIAL EN GRUPO (VARIAS PERSONAS)</label>
                                         </div>
                                     </div>
                                 </div>
                             </div>                            
                             <div class="row">
                                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-3">
-                                    <label for="comoSeEntero" >MOTIVO CONSULTA</label>
+                                    <label for="motivo" >MOTIVO CONSULTA</label>
                                     <p>Lee detenidamente cada una de las opciones y selecciona la opción con las que más se identifique tu motivo de consulta</p>
-                                    <select class="form-select" aria-label="Default select example" wire:model.live="comoSeEntero">
+                                    <select class="form-select" aria-label="Default select example" wire:model="motivo">
                                         <option selected>SELECCIONE</option>
-                                        <option value="ME HE SENTIDO ANSIOSO">ME HE SENTIDO ANSIOSO</option>
-                                        <option value="HE ESTADO DEPRIMIDO">HE ESTADO DEPRIMIDO</option>
-                                        <option value="HE ESTADO ESTRESADO">HE ESTADO ESTRESADO</option>
-                                        <option value="HE TENIDO FOBIAS">HE TENIDO FOBIAS</option>
-                                        <option value="HE TENIDO PROBLEMAS CON LA ADICCIÓN">HE TENIDO PROBLEMAS CON LA ADICCIÓN</option>
-                                        <option value="HE TENIDO PROBLEMAS FAMILIARES">HE TENIDO PROBLEMAS FAMILIARES</option>
-                                        <option value="HE TENIDO PROBLEMAS CON MI PAREJA">HE TENIDO PROBLEMAS CON MI PAREJA</option>
-                                        <option value="HE TENIDO PROBLEMAS EN MI COMUNIDAD">HE TENIDO PROBLEMAS EN MI COMUNIDAD</option>
-                                        <option value="HE TENIDO PROBLEMAS EN MI TRABAJO">HE TENIDO PROBLEMAS EN MI TRABAJO</option>
-                                        <option value="HE ESTADO EN DUELO POR LA PÉRDIDA DE UN TRABAJO">HE ESTADO EN DUELO POR LA PÉRDIDA DE UN TRABAJO</option>
-                                        <option value="HE ESTADO EN DUELO POR LA PÉRDIDA DE UN FAMILIAR">HE ESTADO EN DUELO POR LA PÉRDIDA DE UN FAMILIAR</option>
-                                        <option value="HE ESTADO EN DUELO POR UNA PÉRDIDA MATERIAL">HE ESTADO EN DUELO POR UNA PÉRDIDA MATERIAL</option>
-                                        <option value="HE ESTADO EN DUELO POR LA MIGRACIÓN DE UN SER QUERIDO">HE ESTADO EN DUELO POR LA MIGRACIÓN DE UN SER QUERIDO</option>
-                                        <option value="HE SUFRIDO VIOLENCIA POR PARTE DE MI PAREJA">HE SUFRIDO VIOLENCIA POR PARTE DE MI PAREJA</option>
-                                        <option value="HE SUFRIDO VIOLENCIA DE GÉNERO">HE SUFRIDO VIOLENCIA DE GÉNERO</option>
-                                        <option value="HE SUFRIDO VIOLENCIA LABORAL">HE SUFRIDO VIOLENCIA LABORAL</option>
-                                        <option value="HE SUFRIDO VIOLENCIA POLÍTICA">HE SUFRIDO VIOLENCIA POLÍTICA</option>
-                                        <option value="HE SUFRIDO VIOLENCIA SEXUAL">HE SUFRIDO VIOLENCIA SEXUAL</option>
-                                        <option value="HE SUFRIDO VIOLENCIA CRIMINAL">HE SUFRIDO VIOLENCIA CRIMINAL</option>
-                                        <option value="HE SIDO VIOLENTO">HE SIDO VIOLENTO</option>
-                                        <option value="HE TENIDO PROBLEMA CON MI AUTOESTIMA">HE TENIDO PROBLEMA CON MI AUTOESTIMA</option>
-                                        <option value="HE TENIDO PROBLEMAS EN MI INSTITUCIÓN EDUCATIVA">HE TENIDO PROBLEMAS EN MI INSTITUCIÓN EDUCATIVA</option>
-                                        <option value="QUIERO TRABAJAR EN MI SEXUALIDAD">QUIERO TRABAJAR EN MI SEXUALIDAD</option>
-                                        <option value="QUIERO TRABAJAR EN MI PROYECTO DE VIDA">QUIERO TRABAJAR EN MI PROYECTO DE VIDA</option>
-                                        <option value="QUIERO CONOCERME MÁS">QUIERO CONOCERME MÁS</option>
-                                        <option value="QUIERO HERRAMIENTAS DE CRIANZA PARA MIS HIJOS(AS)">QUIERO HERRAMIENTAS DE CRIANZA PARA MIS HIJOS(AS)</option>
-                                        <option value="QUIERO HERRAMIENTAS PARA MI EMBARAZO(PARTO Y POSTPARTO)">QUIERO HERRAMIENTAS PARA MI EMBARAZO(PARTO Y POSTPARTO)</option>
-                                        <option value="QUIERO TRABAJAR EN MI IDENTIDAD DE GÉNERO">QUIERO TRABAJAR EN MI IDENTIDAD DE GÉNERO</option>
-                                        <option value="HE TENIDO PENSAMIENTOS NEGATIVOS">HE TENIDO PENSAMIENTOS NEGATIVOS</option>
+                                        @foreach ($motivos as $item)
+                                            <option value="{{ $item->id }}">{{ $item->nombre }}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-xl-6 col-lg-12 col-md-12 col-sm-12 mb-3">
-                                    <label for="name">¿HAS RECIBIDO ATENCIÓN PSICOLÓGICA O PSIQUIÁTRICA ANTERIORMENTE?</label>
-                                    <div class="@error('direccion') border border-danger rounded-3  @enderror">
+                                    <label for="atencion_psicologica">¿HAS RECIBIDO ATENCIÓN PSICOLÓGICA O PSIQUIÁTRICA ANTERIORMENTE?</label>
+                                    <div class="@error('atencion_psicologica') border border-danger rounded-3  @enderror">
                                         <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+                                            <input wire:model="atencion_psicologica" class="form-check-input" type="radio" name="atencion_psicologica" id="inlineRadio1" value="1">
                                             <label class="form-check-label" for="inlineRadio1">SI</label>
                                         </div>
                                         <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+                                            <input wire:model="atencion_psicologica" class="form-check-input" type="radio" name="atencion_psicologica" id="inlineRadio2" value="0">
                                             <label class="form-check-label" for="inlineRadio2">NO</label>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-xl-6 col-lg-12 col-md-12 col-sm-12 mb-3">
-                                    <label for="name">¿HAS SIDO DIAGNOSTICADO(A) CON ALGUNA CONDICIÓN O TRASTORNO PSICOLÓGICO O PSIQUIÁTRICO?</label>
-                                    <div class="@error('direccion') border border-danger rounded-3  @enderror">
+                                    <label for="trastorno_psicologico">¿HAS SIDO DIAGNOSTICADO(A) CON ALGUNA CONDICIÓN O TRASTORNO PSICOLÓGICO O PSIQUIÁTRICO?</label>
+                                    <div class="@error('trastorno_psicologico') border border-danger rounded-3  @enderror">
                                         <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+                                            <input wire:model="trastorno_psicologico" class="form-check-input" type="radio" name="trastorno_psicologico" id="inlineRadio1" value="1">
                                             <label class="form-check-label" for="inlineRadio1">SI</label>
                                         </div>
                                         <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+                                            <input wire:model="trastorno_psicologico" class="form-check-input" type="radio" name="trastorno_psicologico" id="inlineRadio2" value="0">
                                             <label class="form-check-label" for="inlineRadio2">NO</label>
                                         </div>
                                     </div>
@@ -357,13 +304,12 @@
                                     <div>
                                         <p>Por favor, cargue una foto de su cédula de identidad. Es importante verificar sus datos personales para poder ofrecerle la atención segura, confidencial y gratuita.</p>
                                         <div class="mb-4 d-flex justify-content-center">
-                                            <img id="selectedImage" src="{{ asset('assets/img/cedula.jpg') }}"
-                                            alt="example placeholder" style="width: 300px;" />
+                                            <img wire:ignore.self id="selectedImage" src="{{ asset('assets/img/cedula.jpg') }}" alt="example placeholder" style="width: 300px;" />
                                         </div>
                                         <div class="d-flex justify-content-center">
                                             <div data-mdb-ripple-init class="btn btn-primary btn-rounded">
                                                 <label class="form-label text-white m-1" for="customFile1">SUBIR IMAGEN</label>
-                                                <input type="file" class="form-control d-none" id="customFile1" onchange="displaySelectedImage(event, 'selectedImage')" />
+                                                <input wire:model="file" type="file" class="form-control d-none" id="customFile1" onchange="displaySelectedImage(event, 'selectedImage')" />
                                             </div>
                                         </div>
                                     </div>

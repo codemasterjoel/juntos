@@ -5,7 +5,6 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 
-use App\Models\User;
 
 class DatabaseSeeder extends Seeder
 {
@@ -31,8 +30,12 @@ class DatabaseSeeder extends Seeder
             CentroSeeder::class,
             Centros2Seeder::class,
             Centros3Seeder::class,
+            MotivoSeeder::class,
+            EnteroSeeder::class,
+            ModalidadSeeder::class,
             NivelAcademicoSeeder::class,
             GeneroSeeder::class,
+            SexoSeeder::class,
             ProfesionSeeder::class,
             UserSeeder::class,
             RolePermissionSeeder::class

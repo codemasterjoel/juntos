@@ -52,6 +52,8 @@ class CreateUsersTable extends Migration
             $table->foreignId('especializacion_id')->nullable()->references('id')->on('especializacions')->nullOnDelete()->cascadeOnUpdate();
             $table->string('role')->default('paciente'); // 'admin', 'doctor', 'paciente'
             $table->rememberToken();
+            $table->string('file')->nullable();
+            $table->string('foto')->nullable();
             $table->timestamps();
         });
     }
