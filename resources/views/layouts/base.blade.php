@@ -44,7 +44,7 @@
     <!--   Core JS Files   -->
     <script src="assets/js/core/popper.min.js"></script>
     <script src="assets/js/core/bootstrap.min.js"></script>
-    <script src="assets/js/plugins/smooth-scrollbar.min.js"></script>
+    {{-- <script src="assets/js/plugins/smooth-scrollbar.min.js"></script> --}}
     <!-- Github buttons -->
     <script async defer src="{{ asset('assets/js/buttons.js') }}"></script>
     <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->

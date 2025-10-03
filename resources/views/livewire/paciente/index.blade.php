@@ -25,20 +25,23 @@
                                 @foreach ($pacientes as $item)
                                     <tr>
                                         <td><p class=" text-center mb-0">{{ $item->id }}</p></td>
-                                        <td>{{$item->name}}</td>
+                                        <td>{{$item->nombre}}</td>
                                         <td>{{$item->parroquia->nombre}}</td>
                                         <td class=" text-center">
                                             <div class="d-flex align-items-center justify-content-center">
-                                            <span class="me-2 text-xs font-weight-bold">60%</span>
-                                            <div>
-                                                <div class="progress">
-                                                <div class="progress-bar bg-gradient-info" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;"></div>
+                                                <span class="me-2 text-xs font-weight-bold">60%</span>
+                                                <div>
+                                                    <div class="progress">
+                                                    <div class="progress-bar bg-gradient-info" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;"></div>
+                                                    </div>
                                                 </div>
-                                            </div>
                                             </div>
                                         </td>
                                         <td class="align-middle text-center text-sm"><span class="badge {{ $item->is_active ? 'badge-sm bg-gradient-success' : 'badge-sm bg-gradient-danger' }}">{{ $item->is_active ? 'activo' : 'inactivo' }}</span></td>
-                                        <td class="text-center"><a href="javascript:;" class="text-success font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user"><span class="material-icons">edit</span></a></td>
+                                        <td class="text-center align-items-center">
+                                            <a href="javascript:;" class="text-success font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user"><span class="material-icons">edit</span></a>
+                                            <a href="javascript:;" wire:click="asignarEspecialista('{{$item->id}}')" class="text-info font-weight-bold" data-bs-toggle="modal" data-bs-target="#AgregarDoctor"><span class="material-icons">person_add</span></a>
+                                        </td>
                                     </tr>
                                 @endforeach
                             </tbody>
@@ -49,4 +52,31 @@
         </div>
     </div>
 
+    <div wire:ignore.self class="modal fade z-999" id="AgregarDoctor" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header bg-info">
+                    <h3 class="modal-title fs-5 mt-4 text-2xl text-cyan-400 font-bold text-center text-white">ASIGNAR ESPECIALISTA</h3>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-3">
+                            <label for="especialista">ESPECIALISTA</label>
+                            <select wire:model="cedula" class="form-select" id="especialista" name="especialista">
+                                <option selected>SELECCIONE</option>
+                                @foreach ($especialistas as $item)
+                                    <option value="{{ $item->cedula }}">{{ $item->nombre }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn bg-gradient-danger btn-sm mb-0" wire:click.prevent="limpiarCampos()" data-bs-dismiss="modal">Salir</button>
+                    <button type="submit" class="btn bg-gradient-info btn-sm mb-0" wire:click.prevent="guardar({{ $item->id }})">GUARDAR</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

@@ -7,9 +7,10 @@
                         <div><h5 class="mb-0 text-uppercase text-info text-gradient">CITAS PROGRAMADAS</h5></div>
                     </div>
                 </div>
-                <div class="card-body px-0 pt-0 pb-2">
-                    <div class="table-responsive p-0">
+                <div class="card-body px-0 pt-0 pb-2 px-4 py-4">
+                    <div class="">
                         <div id='calendar'></div>
+                    </div>
                 </div>
             </div>
         </div>

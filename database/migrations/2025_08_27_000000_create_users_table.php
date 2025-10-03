@@ -41,6 +41,7 @@ class CreateUsersTable extends Migration
             
             $table->timestamp('email_verified_at')->nullable();
             $table->string('direccion')->nullable();
+            $table->integer('especialista_id')->nullable();
 
             $table->foreignId('entero_id')->nullable()->references('id')->on('enteros')->onDelete('cascade')->onUpdate('cascade');
             $table->foreignId('modalidad_id')->nullable()->references('id')->on('modalidads')->onDelete('cascade')->onUpdate('cascade');
@@ -49,7 +50,6 @@ class CreateUsersTable extends Migration
             $table->boolean('trastorno_psicologico')->default(false);
 
             $table->boolean('is_active')->default(true);
-            $table->foreignId('especializacion_id')->nullable()->references('id')->on('especializacions')->nullOnDelete()->cascadeOnUpdate();
             $table->string('role')->default('paciente'); // 'admin', 'doctor', 'paciente'
             $table->rememberToken();
             $table->string('file')->nullable();

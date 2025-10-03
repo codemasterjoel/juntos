@@ -16,11 +16,12 @@ use App\Http\Livewire\Rtl;
 use App\Http\Livewire\Doctor\Index as Doctor;
 use App\Http\Livewire\Paciente\Index as Paciente;
 use App\Http\Livewire\Citas\Index as Citas;
+use App\Http\Livewire\Ingresar\Index as Ingresar;
 
 use App\Http\Livewire\AdminDashboar\Index as AdminDashboard;
 
 use App\Http\Livewire\LaravelExamples\UserProfile;
-use App\Http\Livewire\LaravelExamples\UserManagement;
+use App\Http\Livewire\usuario\Index as Usuario;
 
 use Illuminate\Http\Request;
 
@@ -30,6 +31,7 @@ Route::get('/', function() {
 Route::get('/logout', function() {Auth::logout(); return redirect('/login'); })->name('logout');
 
 Route::get('/sign-up', SignUp::class)->name('sign-up');
+Route::get('/ingresar', Ingresar::class)->name('ingresar');
 Route::get('/login', Login::class)->name('login');
 
 Route::get('/login/forgot-password', ForgotPassword::class)->name('forgot-password');
@@ -50,6 +52,6 @@ Route::middleware('auth')->group(function () {
     Route::get('/static-sign-up', StaticSignUp::class)->name('static-sign-up');
     Route::get('/rtl', Rtl::class)->name('rtl');
     Route::get('/laravel-user-profile', UserProfile::class)->name('user-profile');
-    Route::get('/laravel-user-management', UserManagement::class)->name('user-management');
+    Route::get('/usuarios', Usuario::class)->name('usuarios');
 });
 

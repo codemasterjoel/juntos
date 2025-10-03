@@ -76,26 +76,28 @@
                                     <input wire:model="edad" type="integer" name="edad" id="edad" class="form-control">
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="col-xl-4 col-sm-12 mb-3">
-                                    <label for="cedula_representante">CÉDULA REPRESENTANTE</label>
-                                    <div class="@error('cedula_representante') border border-danger rounded-3  @enderror">
-                                        <input wire:model="cedula_representante" type="number" class="form-control" placeholder="Cédula Representante" aria-label="cedula_representante">
+                            @if ($this->edad < 18) {{-- campo Edad --}}
+                                <div class="row">
+                                    <div class="col-xl-4 col-sm-12 mb-3">
+                                        <label for="cedula_representante">CÉDULA REPRESENTANTE</label>
+                                        <div class="@error('cedula_representante') border border-danger rounded-3  @enderror">
+                                            <input wire:model="cedula_representante" type="number" class="form-control" placeholder="Cédula Representante" aria-label="cedula_representante">
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-4 col-sm-12 mb-3">
+                                        <label for="nombre_representante">NOMBRE Y APELLIDO REPRESENTANTE</label>
+                                        <div class="@error('nombre_representante') border border-danger rounded-3  @enderror">
+                                            <input wire:model="nombre_representante" type="text" class="form-control" placeholder="Nombre del Representante">
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-4 col-sm-12 mb-3">
+                                        <label for="tlf_representante">NÚMERO DE CONTACTO DEL REPRESENTANTE</label>
+                                        <div class="@error('tlf_representante') border border-danger rounded-3  @enderror">
+                                            <input wire:model="tlf_representante" type="number" class="form-control" placeholder="Telefono Representante">
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="col-xl-4 col-sm-12 mb-3">
-                                    <label for="nombre_representante">NOMBRE Y APELLIDO REPRESENTANTE</label>
-                                    <div class="@error('nombre_representante') border border-danger rounded-3  @enderror">
-                                        <input wire:model="nombre_representante" type="text" class="form-control" placeholder="Nombre del Representante">
-                                    </div>
-                                </div>
-                                <div class="col-xl-4 col-sm-12 mb-3">
-                                    <label for="tlf_representante">NÚMERO DE CONTACTO DEL REPRESENTANTE</label>
-                                    <div class="@error('tlf_representante') border border-danger rounded-3  @enderror">
-                                        <input wire:model="tlf_representante" type="number" class="form-control" placeholder="Telefono Representante">
-                                    </div>
-                                </div>
-                            </div>
+                            @endif
                             <div class="row">
                                 <div class="col-xl-6 col-lg-12 col-md-12 col-sm-12 mb-3">
                                     <label for="name">USUARIO</label>
