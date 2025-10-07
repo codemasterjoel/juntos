@@ -18,6 +18,7 @@ use App\Models\Genero;
 use App\Models\Sexo;
 use App\Models\Entero;
 use App\Models\Motivo;
+use App\Models\Paciente;
 
 class SignUp extends Component
 {
@@ -49,7 +50,7 @@ class SignUp extends Component
         }
         
         $file = $this->file->store('cedula', 'public_path');
-        $user = User::create([
+        $paciente = Paciente::create([
             'file' => $file,
             'cedula' => $this->cedula,
             'nombre' => $this->nombre,
@@ -62,9 +63,6 @@ class SignUp extends Component
             'cedula_representante' => $this->cedula_representante,
             'nombre_representante' => $this->nombre_representante,
             'tlf_representante' => $this->tlf_representante,
-            'name' => $this->name,
-            'email' => $this->email,
-            'password' => Hash::make($this->password),
             'pais_id' => $this->pais,
             'estado_id' => $this->estado,
             'municipio_id' => $this->municipio,
@@ -78,6 +76,14 @@ class SignUp extends Component
             'atencion_psicologica' => $this->atencion_psicologica,
             'trastorno_psicologico' => $this->trastorno_psicologico,
             'is_active' => true,
+        ]);
+
+        $user = User::create([
+            'paciente_id' => $paciente->id,
+            'name' => $this->name,
+            'email' => $this->email,
+            'password' => Hash::make($this->password),
+            
         ]);
 
         $user->assignRole('paciente');

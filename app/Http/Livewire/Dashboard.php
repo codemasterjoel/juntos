@@ -10,13 +10,13 @@ class Dashboard extends Component
     {
 
     }
-
+    
     public function render() 
     {
         $user = \Auth::user();
         if ($user->hasRole('admin')) {
             return view('livewire.admin.dashboard');
-        } elseif ($user->hasRole('doctor')) {
+        } elseif ($user->hasRole('especialista')) {
             return view('livewire.doctor.dashboard');
         }
         return view('livewire.paciente.dashboard');

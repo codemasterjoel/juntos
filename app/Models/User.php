@@ -19,27 +19,21 @@ class User extends Authenticatable
         'password',
         'remember_token',
     ];
+    protected $fillable = [
+        'name',
+        'email',
+        'password',
+        'especialista_id',
+    ];
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-    public function estado()
+    public function especializacion()
     {
-        return $this->belongsTo(Estado::class);
+        return $this->belongsTo(Especializacion::class);
     }
-    public function municipio()
+    public function paciente()
     {
-        return $this->belongsTo(Municipio::class);
-    }
-    public function parroquia()
-    {
-        return $this->belongsTo(Parroquia::class);
-    }
-    public function comuna()
-    {
-        return $this->belongsTo(Comuna::class);
-    }
-    public function pais()
-    {
-        return $this->belongsTo(Pais::class, 'pais_id', 'id');
+        return $this->belongsTo(Paciente::class);
     }
 }

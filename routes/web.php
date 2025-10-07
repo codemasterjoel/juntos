@@ -20,7 +20,7 @@ use App\Http\Livewire\Ingresar\Index as Ingresar;
 
 use App\Http\Livewire\AdminDashboar\Index as AdminDashboard;
 
-use App\Http\Livewire\LaravelExamples\UserProfile;
+use App\Http\Livewire\Perfil\Index as Perfil;
 use App\Http\Livewire\Usuario\Index as Usuario;
 
 use Illuminate\Http\Request;
@@ -50,7 +50,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/static-sign-in', StaticSignIn::class)->name('sign-in');
     Route::get('/static-sign-up', StaticSignUp::class)->name('static-sign-up');
     Route::get('/rtl', Rtl::class)->name('rtl');
-    Route::get('/laravel-user-profile', UserProfile::class)->name('user-profile');
+    Route::get('/perfil', Perfil::class)->name('perfil');
     Route::get('/usuarios', Usuario::class)->name('usuarios');
 });
 

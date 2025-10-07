@@ -16,9 +16,9 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link {{ Route::currentRouteName() == 'user-profile' ? 'active' : '' }}" href="{{ route('user-profile') }}">
+                <a class="nav-link {{ Route::currentRouteName() == 'perfil' ? 'active' : '' }}" href="{{ route('perfil') }}">
                     <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
-                        <span class="material-icons {{ in_array(request()->route()->getName(),['user-profile']) ? 'text-dark' : 'text-white' }}">person</span>
+                        <span class="material-icons {{ in_array(request()->route()->getName(),['perfil']) ? 'text-dark' : 'text-white' }}">person</span>
                     </div>
                     <span class="nav-link-text ms-1"><b>PERFIL</b></span>
                 </a>

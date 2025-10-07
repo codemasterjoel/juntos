@@ -27,6 +27,7 @@ class DatabaseSeeder extends Seeder
             ConsejoComunal8Seeder::class,
             ConsejoComunal9Seeder::class,
             ConsejoComunal10Seeder::class,
+            EspecializacionSeeder::class,
             CentroSeeder::class,
             Centros2Seeder::class,
             Centros3Seeder::class,
@@ -37,6 +38,8 @@ class DatabaseSeeder extends Seeder
             GeneroSeeder::class,
             SexoSeeder::class,
             ProfesionSeeder::class,
+            EspecialistaSeeder::class,
+            PacienteSeeder::class,
             UserSeeder::class,
             RolePermissionSeeder::class
         ]);

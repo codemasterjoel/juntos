@@ -2,10 +2,9 @@
 
 namespace App\Models;
 
-
 use Illuminate\Database\Eloquent\Model;
 
-class Especialista extends Model
+class Paciente extends Model
 {
     protected $fillable = [
         'cedula',
@@ -26,25 +25,19 @@ class Especialista extends Model
         'comuna_id',
         'consejo_comunal_id',
         'direccion',
-        'especializacion_id',
+        'entero_id',
+        'modalidad_id',
+        'motivo_id',
+        'atencion_psicologica',
+        'trastorno_psicosocial',
         'is_active',
         'role',
         'file',
         'foto',
+        'especialista_id',
     ];
 
-    public function genero()
-    {
-        return $this->belongsTo(Genero::class);
-    }
-    public function sexo()
-    {
-        return $this->belongsTo(Sexo::class);
-    }
-    public function pais()
-    {
-        return $this->belongsTo(Pais::class);
-    }
+    
     public function estado()
     {
         return $this->belongsTo(Estado::class);
@@ -61,13 +54,20 @@ class Especialista extends Model
     {
         return $this->belongsTo(Comuna::class);
     }
+    public function pais()
+    {
+        return $this->belongsTo(Pais::class, 'pais_id', 'id');
+    }
     public function consejo_comunal()
     {
         return $this->belongsTo(ConsejoComunal::class);
     }
-    public function especializacion()
+    public function genero()
     {
-        return $this->belongsTo(Especializacion::class);
+        return $this->belongsTo(Genero::class);
     }
-    
+    public function sexo()
+    {
+        return $this->belongsTo(Sexo::class);
+    }
 }

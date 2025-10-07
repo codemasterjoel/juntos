@@ -29,10 +29,10 @@
                                         <td>{{$item->parroquia->nombre}}</td>
                                         <td class=" text-center">
                                             <div class="d-flex align-items-center justify-content-center">
-                                                <span class="me-2 text-xs font-weight-bold">60%</span>
+                                                <span class="me-2 text-xs font-weight-bold">0%</span>
                                                 <div>
                                                     <div class="progress">
-                                                    <div class="progress-bar bg-gradient-info" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;"></div>
+                                                    <div class="progress-bar bg-gradient-info" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;"></div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -63,10 +63,10 @@
                     <form>
                         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-3">
                             <label for="especialista">ESPECIALISTA</label>
-                            <select wire:model="cedula" class="form-select" id="especialista" name="especialista">
+                            <select wire:model="especialista" class="form-select" id="especialista" name="especialista">
                                 <option selected>SELECCIONE</option>
                                 @foreach ($especialistas as $item)
-                                    <option value="{{ $item->cedula }}">{{ $item->nombre }}</option>
+                                    <option value="{{ $item->id }}">{{ $item->nombre }}</option>
                                 @endforeach
                             </select>
                         </div>

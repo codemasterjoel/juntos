@@ -3,20 +3,106 @@
 namespace App\Http\Livewire\Doctor;
 
 use Livewire\Component;
-use App\Models\User as Doctor;
+use Carbon\Carbon;
+use Livewire\WithFileUploads;
+use Illuminate\Support\Facades\Hash;
+
+use App\Models\Especialista;
+use App\Models\User;
+use App\Models\Estado;
+use App\Models\Municipio;
+use App\Models\Parroquia;
+use App\Models\Comuna;
+use App\Models\ConsejoComunal;
+use App\Models\Pais;
+use App\Models\Genero;
+use App\Models\Sexo;
+use App\Models\Paciente;
+use App\Models\Especializacion;
 
 
 class Index extends Component
 {
-    public $doctores;
+    use WithFileUploads;
+    public $estados, $municipios, $parroquias, $comunas, $centros, $consejoComunales, $paises, $sexos, $generos, $especialidades = null;
+    public $estado, $municipio, $parroquia, $comuna, $consejoComunal, $pais = null;
+    public $cedula, $nombre, $tlf_contacto, $tlf_emergencia, $edad, $genero, $sexo, $fechaNac, $direccion, $comoSeEntero, $modalidad, $file, $foto, $especialidad, $name, $email, $password = null;
+    public $especialistas;
 
     public function mount()
     {
-        $this->doctores = Doctor::all();
+        $this->especialistas = Especialista::all();
     }
 
     public function render()
     {
+        $this->estados = Estado::all();
+        $this->paises = Pais::all();
+        $this->generos = Genero::all();
+        $this->sexos = Sexo::all();
+        $this->especialidades = Especializacion::all();
         return view('livewire.doctor.index');
+    }
+
+    public function updatedEstado($id)
+    {
+        $this->municipio = null;
+        $this->parroquia = null;
+        $this->comuna = null;
+        $this->consejoComunal = null;
+        $this->municipios = Municipio::where('estado_id', $id)->get();
+    }
+    public function updatedMunicipio($id)
+    {
+        $this->parroquia = null;
+        $this->comuna = null;
+        $this->consejoComunal = null;
+        $this->parroquias = Parroquia::where('municipio_id', $id)->get();
+    }
+    public function updatedParroquia($id){
+        $this->comuna = null;
+        $this->consejoComunal = null;
+        $this->comunas = Comuna::where('parroquia_id', $id)->get();
+    }
+    public function updatedComuna($id){
+        $this->consejoComunal = null;
+        $this->consejoComunales = ConsejoComunal::where('comuna_id', $id)->get();
+    }
+    public function updatedFechaNac($value)
+    {
+        $this->edad = Carbon::parse($value)->age;
+    }
+    public function guardar()
+    {
+        $file = $this->file->store('cedula', 'public_path');
+        $especialista = Especialista::create([
+            'file' => $file,
+            'cedula' => $this->cedula,
+            'nombre' => $this->nombre,
+            'tlf_contacto' => $this->tlf_contacto,
+            'tlf_emergencia' => $this->tlf_emergencia,
+            'genero_id' => $this->genero,
+            'sexo_id' => $this->sexo,
+            'fecha_nac' => $this->fechaNac,
+            'edad' => $this->edad,
+            'pais_id' => $this->pais,
+            'estado_id' => $this->estado,
+            'municipio_id' => $this->municipio,
+            'parroquia_id' => $this->parroquia,
+            'comuna_id' => $this->comuna,
+            'consejo_comunal_id' => $this->consejoComunal,
+            'direccion' => $this->direccion,
+            'especializacion_id' => $this->especialidad,
+        ]);
+
+        $user = User::create([
+            'name' => $this->name,
+            'email' => $this->email,
+            'password' => Hash::make($this->password),
+            'especialista_id' => $especialista->id,
+        ]);
+
+        session()->flash('message', 'Doctor registrado exitosamente.');
+        return redirect()->to('/doctor');
     }
 }
