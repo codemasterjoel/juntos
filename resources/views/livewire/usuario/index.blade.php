@@ -27,7 +27,7 @@
                             <tbody>
                                 @foreach ($users as $user)
                                     <tr>
-                                        <td class="ps-4"><p class="text-xs font-weight-bold mb-0">{{ $user->id }}</p></td>
+                                        <td class="ps-4"><p class="text-xs font-weight-bold mb-0">{{ $loop->iteration }}</p></td>
                                         <td><div><img src="{{ $user->photo ? asset($user->photo) : asset('assets/img/photo.jpg') }}" class="avatar avatar-sm me-3"></div></td></div></td>
                                         <td class="text-center"><p class="text-xs font-weight-bold mb-0">{{ $user->nombre }}</p></td>
                                         <td class="text-center"><p class="text-xs font-weight-bold mb-0">{{ $user->name }}</p></td>

@@ -28,9 +28,9 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-    public function especializacion()
+    public function especialista()
     {
-        return $this->belongsTo(Especializacion::class);
+        return $this->belongsTo(Especialista::class);
     }
     public function paciente()
     {

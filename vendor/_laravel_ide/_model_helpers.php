@@ -5292,7 +5292,7 @@ namespace App\Models {
      * @property string $email
      * @property string $name
      * @property int $id
-     * @property-read \App\Models\Especializacion $especializacion
+     * @property-read \App\Models\Especialista $especialista
      * @property-read \App\Models\Paciente $paciente
      * @property-read \Illuminate\Database\Eloquent\Collection<int, \Illuminate\Notifications\DatabaseNotification> $notifications
      * @property-read int|null $notifications_count

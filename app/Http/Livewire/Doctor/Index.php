@@ -27,11 +27,12 @@ class Index extends Component
     public $estados, $municipios, $parroquias, $comunas, $centros, $consejoComunales, $paises, $sexos, $generos, $especialidades = null;
     public $estado, $municipio, $parroquia, $comuna, $consejoComunal, $pais = null;
     public $cedula, $nombre, $tlf_contacto, $tlf_emergencia, $edad, $genero, $sexo, $fechaNac, $direccion, $comoSeEntero, $modalidad, $file, $foto, $especialidad, $name, $email, $password = null;
-    public $especialistas;
+    public $especialistas, $pacientes = null;
 
     public function mount()
     {
         $this->especialistas = Especialista::all();
+        $this->pais = "VE";
     }
 
     public function render()
@@ -104,5 +105,40 @@ class Index extends Component
 
         session()->flash('message', 'Doctor registrado exitosamente.');
         return redirect()->to('/doctor');
+    }
+    public function limpiarCampos()
+    {
+        $this->estado = null;
+        $this->municipio = null;
+        $this->parroquia = null;
+        $this->estados = null;
+        $this->municipios = null;
+        $this->parroquias = null;
+        $this->comunas = null;
+        $this->consejoComunales = null;
+        $this->comuna = null;
+        $this->consejoComunal = null;
+        $this->pais = "VE";
+        $this->cedula = null;
+        $this->nombre = null;
+        $this->tlf_contacto = null;
+        $this->tlf_emergencia = null;
+        $this->edad = null;
+        $this->genero = null;
+        $this->sexo = null;
+        $this->fechaNac = null;
+        $this->direccion = null;
+        $this->comoSeEntero = null;
+        $this->modalidad = null;
+        $this->file = null;
+        $this->foto = null;
+        $this->especialidad = null;
+        $this->name = null;
+        $this->email = null;
+        $this->password = null;
+    }
+    public function verPacientes($id)
+    {
+        $this->pacientes = Paciente::where('especialista_id', $id)->get();
     }
 }

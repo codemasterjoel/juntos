@@ -14,6 +14,7 @@
                             <thead>
                                 <tr>
                                     <th class="text-uppercase text-center font-weight-bolder">#</th>
+                                    <th class="text-uppercase font-weight-bolder">FOTO</th>
                                     <th class="text-uppercase font-weight-bolder ps-2">NOMBRE</th>
                                     <th class="text-uppercase font-weight-bolder">ESPECIALIDAD</th>
                                     <th class="text-center text-uppercase font-weight-bolder">ESTATUS</th>
@@ -23,21 +24,22 @@
                             <tbody>
                                 @foreach ($especialistas as $item)
                                     <tr>
-                                        <td><p class=" text-center mb-0">{{ $item->id }}</p></td>
+                                        <td><p class=" text-center mb-0">{{ $loop->iteration }}</p></td>
+                                        <td><div><img src="../assets/img/team-2.jpg" class="avatar avatar-sm me-3"></div></td>
                                         <td>
-                                            <div class="d-flex px-2 py-1">
-                                                <div><img src="../assets/img/team-2.jpg" class="avatar avatar-sm me-3"></div>
-                                                <div class="d-flex flex-column justify-content-center"><h6 class="mb-0 text-sm">{{ $item->nombre }}</h6><p class="text-xs text-secondary mb-0">{{ $item->email }}</p></div>
+                                            <div>
+                                                <div class="text-xs font-weight-bold mb-0"><h6 class="mb-0 text-sm">{{ $item->nombre }}</h6><p class="text-xs text-secondary mb-0">{{ $item->email }}</p></div>
+                                                <p class="text-xs text-secondary">{{$item->tlf_contacto}}</p>
                                             </div>
                                         </td>
                                         <td>
-                                            <p class="text-xs font-weight-bold mb-0">{{ $item->especializacion }}</p>
+                                            <p class="text-xs font-weight-bold mb-0">{{ isset($item->especializacion->nombre) ? $item->especializacion->nombre : 'Sin especialización' }}</p>
                                             <p class="text-xs text-secondary">Organization</p>
                                         </td>
                                         <td class="align-middle text-center text-sm"><span class="badge {{ $item->is_active ? 'badge-sm bg-gradient-success' : 'badge-sm bg-gradient-danger' }}">{{ $item->is_active ? 'activo' : 'inactivo' }}</span></td>
                                         <td class="text-center">
                                             <a href="" class="text-success font-weight-bold text-xs" data-bs-toggle="modal" data-bs-target="#ModalEspecialista" data-toggle="tooltip" data-original-title="Editar user"><span class="material-icons">edit</span></a>
-                                            <a href="" class="text-info font-weight-bold text-xs" data-bs-toggle="modal" data-bs-target="#ModalEspecialista" data-toggle="tooltip" data-original-title="Agregar user"><span class="material-icons">person_add</span></a>
+                                            <a href="" wire:click="verPacientes('{{ $item->id }}')" class="text-info font-weight-bold text-xs" data-bs-toggle="modal" data-bs-target="#ModalPacientes" data-toggle="tooltip" data-original-title="Ver Pacientes"><span class="material-icons">recent_actors</span></a>
                                         </td>
                                     </tr>
                                 @endforeach
@@ -253,8 +255,8 @@
                         </div>
                         <div class="row">
                             <div class="col-xl-4 col-lg-12 col-md-12 col-sm-12 mb-3">
-                                <label for="comoSeEntero" >ESPECIALIZACIÓN</label>
-                                <select class="form-select" aria-label="Default select example" wire:model="comoSeEntero">
+                                <label for="especialidad" >ESPECIALIZACIÓN</label>
+                                <select class="form-select" aria-label="Default select example" wire:model="especialidad">
                                     <option selected>SELECCIONE</option>
                                     @foreach ($especialidades as $item)
                                         <option value="{{ $item->id }}">{{ $item->nombre }}</option>
@@ -277,34 +279,88 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="text-center">
-                            <button type="submit" class="btn bg-gradient-dark w-100 my-4 mb-2">REGISTRARSE</button>
-                        </div>
-                        <p class="text-sm mt-3 mb-0">¿YA TIENES UNA CUENTA?<a href="{{ route('login') }}" class="text-dark font-weight-bolder"> INICIAR SESIÓN</a>
-                        </p>
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn bg-gradient-danger btn-sm mb-0" wire:click.prevent="limpiarCampos()" data-bs-dismiss="modal">Salir</button>
-                    <button type="submit" class="btn bg-gradient-info btn-sm mb-0" wire:click.prevent="guardar()">GUARDAR</button>
+                    <button type="submit" class="btn bg-gradient-info w-100 my-4 mb-2" wire:click.prevent="guardar()">GUARDAR</button>
+                    <button type="button" class="btn bg-gradient-danger w-100 mb-0" wire:click.prevent="limpiarCampos()" data-bs-dismiss="modal">Salir</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div wire:ignore.self class="modal fade z-999" id="ModalPacientes" tabindex="-1" aria-labelledby="ModalPacientes" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header bg-danger">
+                    <h3 class="modal-title fs-5 mt-4 text-2xl text-cyan-400 font-bold text-center text-white">PACIENTES</h3>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="card-body px-0 pt-0 pb-2">
+                        <div class="table-responsive p-0">
+                            <table class="table align-items-center mb-0">
+                                <thead>
+                                    <tr>
+                                        <th class="text-uppercase text-center font-weight-bolder">#</th>
+                                        <th class="text-uppercase font-weight-bolder ps-2">NOMBRE</th>
+                                        <th class="text-uppercase font-weight-bolder">parroquia</th>
+                                        <th class="text-uppercase text-center font-weight-bolder">AVANCE</th>
+                                        <th class="text-center text-uppercase font-weight-bolder">ESTATUS</th>
+                                        <th class="text-center text-uppercase font-weight-bolder">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if (!is_null($pacientes))
+                                        @foreach ($pacientes as $item)
+                                            <tr>
+                                                <td><p class=" text-center mb-0">{{ $loop->iteration }}</p></td>
+                                                <td>{{$item->nombre}}</td>
+                                                <td>{{$item->parroquia->nombre}}</td>
+                                                <td class=" text-center">
+                                                    <div class="d-flex align-items-center justify-content-center">
+                                                        <span class="me-2 text-xs font-weight-bold">0%</span>
+                                                        <div>
+                                                            <div class="progress">
+                                                            <div class="progress-bar bg-gradient-info" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;"></div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td class="align-middle text-center text-sm"><span class="badge {{ $item->is_active ? 'badge-sm bg-gradient-success' : 'badge-sm bg-gradient-danger' }}">{{ $item->is_active ? 'activo' : 'inactivo' }}</span></td>
+                                                <td class="text-center align-items-center">
+                                                    <a href="javascript:;" class="text-success font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user"><span class="material-icons">edit</span></a>
+                                                    <a href="javascript:;" wire:click="asignarEspecialista('{{$item->id}}')" class="text-info font-weight-bold" data-bs-toggle="modal" data-bs-target="#AgregarDoctor"><span class="material-icons">person_add</span></a>
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                    @endif
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn bg-gradient-danger w-100 mb-0" wire:click.prevent="limpiarCampos()" data-bs-dismiss="modal">Salir</button>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
 <script>
-function displaySelectedImage(event, elementId) {
-    const selectedImage = document.getElementById(elementId);
-    const fileInput = event.target;
+    function displaySelectedImage(event, elementId) {
+        const selectedImage = document.getElementById(elementId);
+        const fileInput = event.target;
 
-    if (fileInput.files && fileInput.files[0]) {
-        const reader = new FileReader();
+        if (fileInput.files && fileInput.files[0]) {
+            const reader = new FileReader();
 
-        reader.onload = function(e) {
-            selectedImage.src = e.target.result;
-        };
+            reader.onload = function(e) {
+                selectedImage.src = e.target.result;
+            };
 
-        reader.readAsDataURL(fileInput.files[0]);
+            reader.readAsDataURL(fileInput.files[0]);
+        }
     }
-}
 </script>

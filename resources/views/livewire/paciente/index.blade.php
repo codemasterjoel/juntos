@@ -22,28 +22,30 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($pacientes as $item)
-                                    <tr>
-                                        <td><p class=" text-center mb-0">{{ $item->id }}</p></td>
-                                        <td>{{$item->nombre}}</td>
-                                        <td>{{$item->parroquia->nombre}}</td>
-                                        <td class=" text-center">
-                                            <div class="d-flex align-items-center justify-content-center">
-                                                <span class="me-2 text-xs font-weight-bold">0%</span>
-                                                <div>
-                                                    <div class="progress">
-                                                    <div class="progress-bar bg-gradient-info" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;"></div>
+                                @if (!is_null($pacientes))
+                                    @foreach ($pacientes as $item)
+                                        <tr>
+                                            <td><p class=" text-center mb-0">{{ $loop->iteration }}</p></td>
+                                            <td>{{$item->nombre}}</td>
+                                            <td>{{$item->parroquia->nombre}}</td>
+                                            <td class=" text-center">
+                                                <div class="d-flex align-items-center justify-content-center">
+                                                    <span class="me-2 text-xs font-weight-bold">0%</span>
+                                                    <div>
+                                                        <div class="progress">
+                                                        <div class="progress-bar bg-gradient-info" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;"></div>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                        </td>
-                                        <td class="align-middle text-center text-sm"><span class="badge {{ $item->is_active ? 'badge-sm bg-gradient-success' : 'badge-sm bg-gradient-danger' }}">{{ $item->is_active ? 'activo' : 'inactivo' }}</span></td>
-                                        <td class="text-center align-items-center">
-                                            <a href="javascript:;" class="text-success font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user"><span class="material-icons">edit</span></a>
-                                            <a href="javascript:;" wire:click="asignarEspecialista('{{$item->id}}')" class="text-info font-weight-bold" data-bs-toggle="modal" data-bs-target="#AgregarDoctor"><span class="material-icons">person_add</span></a>
-                                        </td>
-                                    </tr>
-                                @endforeach
+                                            </td>
+                                            <td class="align-middle text-center text-sm"><span class="badge {{ $item->is_active ? 'badge-sm bg-gradient-success' : 'badge-sm bg-gradient-danger' }}">{{ $item->is_active ? 'activo' : 'inactivo' }}</span></td>
+                                            <td class="text-center align-items-center">
+                                                <a href="javascript:;" class="text-success font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user"><span class="material-icons">edit</span></a>
+                                                <a href="javascript:;" wire:click="asignarEspecialista('{{$item->id}}')" class="text-info font-weight-bold" data-bs-toggle="modal" data-bs-target="#AgregarDoctor"><span class="material-icons">person_add</span></a>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                @endif
                             </tbody>
                         </table>
                     </div>
@@ -65,9 +67,9 @@
                             <label for="especialista">ESPECIALISTA</label>
                             <select wire:model="especialista" class="form-select" id="especialista" name="especialista">
                                 <option selected>SELECCIONE</option>
-                                @foreach ($especialistas as $item)
-                                    <option value="{{ $item->id }}">{{ $item->nombre }}</option>
-                                @endforeach
+                                    @foreach ($especialistas as $item)
+                                        <option value="{{ $item->id }}">{{ $item->nombre }}</option>
+                                    @endforeach
                             </select>
                         </div>
                     </form>
