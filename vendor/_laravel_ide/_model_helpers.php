@@ -3097,6 +3097,7 @@ namespace App\Models {
      * @property mixed $estado_id
      * @property string $nombre
      * @property int $id
+     * @property-read \App\Models\Estado $estado
      * @method static \Illuminate\Database\Eloquent\Builder<Municipio>|Municipio whereId($value)
      * @method static \Illuminate\Database\Eloquent\Builder<Municipio>|Municipio whereNombre($value)
      * @method static \Illuminate\Database\Eloquent\Builder<Municipio>|Municipio whereEstadoId($value)
@@ -3740,6 +3741,8 @@ namespace App\Models {
      * @property-read \App\Models\ConsejoComunal $consejo_comunal
      * @property-read \App\Models\Genero $genero
      * @property-read \App\Models\Sexo $sexo
+     * @property-read \App\Models\Entero $entero
+     * @property-read \App\Models\Motivo $motivo
      * @method static \Illuminate\Database\Eloquent\Builder<Paciente>|Paciente whereId($value)
      * @method static \Illuminate\Database\Eloquent\Builder<Paciente>|Paciente whereCedula($value)
      * @method static \Illuminate\Database\Eloquent\Builder<Paciente>|Paciente whereNombre($value)
@@ -4375,6 +4378,7 @@ namespace App\Models {
      * @property mixed $municipio_id
      * @property string $nombre
      * @property int $id
+     * @property-read \App\Models\Municipio $municipio
      * @method static \Illuminate\Database\Eloquent\Builder<Parroquia>|Parroquia whereId($value)
      * @method static \Illuminate\Database\Eloquent\Builder<Parroquia>|Parroquia whereNombre($value)
      * @method static \Illuminate\Database\Eloquent\Builder<Parroquia>|Parroquia whereMunicipioId($value)

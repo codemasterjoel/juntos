@@ -17,6 +17,11 @@ use App\Http\Livewire\Doctor\Index as Doctor;
 use App\Http\Livewire\Paciente\Index as Paciente;
 use App\Http\Livewire\Citas\Index as Citas;
 use App\Http\Livewire\Ingresar\Index as Ingresar;
+use App\Http\Livewire\Especializacion\Index as Especializacion;
+use App\Http\Livewire\Entero\Index as Entero;
+use App\Http\Livewire\Motivo\Index as Motivo;
+use App\Http\Livewire\Comuna\Index as Comuna;
+use App\Http\Livewire\ConsejoComunal\Index as ConsejoComunal;
 
 use App\Http\Livewire\AdminDashboar\Index as AdminDashboard;
 
@@ -42,6 +47,11 @@ Route::middleware('auth')->group(function () {
     Route::get('/admin/dashboard', AdminDashboard::class)->middleware(['role:admin'])->name('admin.dashboard');
     Route::get('/doctor', Doctor::class)->name('doctor');
     Route::get('/paciente', Paciente::class)->name('paciente');
+    Route::get('/especializacion', Especializacion::class)->name('especializacion');
+    Route::get('/motivo', Motivo::class)->name('motivo');
+    Route::get('/entero', Entero::class)->name('entero');
+    Route::get('/comuna', Comuna::class)->name('comuna');
+    Route::get('/consejo-comunal', ConsejoComunal::class)->name('consejo-comunal');
     Route::get('/citas', Citas::class)->name('citas');
     // Route::get('/paciente', Paciente::class)->middleware(['role:doctor'])->name('paciente');
     Route::get('/billing', Billing::class)->name('billing');

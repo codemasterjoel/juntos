@@ -70,4 +70,12 @@ class Paciente extends Model
     {
         return $this->belongsTo(Sexo::class);
     }
+    public function entero()
+    {
+        return $this->belongsTo(Entero::class);
+    }
+    public function motivo()
+    {
+        return $this->belongsTo(Motivo::class);
+    }
 }
