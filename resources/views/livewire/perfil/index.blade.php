@@ -15,7 +15,7 @@
                 </div>
                 <div class="col-auto my-auto">
                     <div class="h-100">
-                        <h5 class="mb-1"> {{ $user->paciente->nombre }} </h5>
+                        <h5 class="mb-1"> {{ $nombre }} </h5>
                         <p class="mb-0 font-weight-bold text-sm"> {{ __('Paciente') }}</p>
                     </div>
                 </div>
@@ -326,94 +326,109 @@
                         </div>
                     </div>
                 </div>
-                <div class="row px-3">
-                    <div class="col-xl-4 col-lg-12 col-md-12 col-sm-12 mb-3">
-                        <label for="comoSeEntero" >¿COMO TE ENTERASTE DE SIEMPRE JUNTOS?</label>
-                        <select class="form-select" aria-label="Default select example" wire:model="comoSeEntero">
-                            <option selected>SELECCIONE</option>
-                            @foreach ($enteros as $item)
-                                <option value="{{ $item->id }}">{{ $item->nombre }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                </div>
-                <div class="row px-3">
-                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-3">
-                        <label for="modalidad">MODALIDAD EN QUE PUEDE RECIBIR LA ATENCIÓN</label>
-                        <div class="@error('modalidad') border border-danger rounded-3  @enderror">
-                            <div class="form-check form-check-inline">
-                                <input wire:model="modalidad" class="form-check-input" type="radio" name="modalidad" id="inlineRadio1" value="1">
-                                <label class="form-check-label" for="inlineRadio1">PRESENCIAL</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input wire:model="modalidad" class="form-check-input" type="radio" name="modalidad" id="inlineRadio2" value="2">
-                                <label class="form-check-label" for="inlineRadio2">ONLINE</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input wire:model="modalidad" class="form-check-input" type="radio" name="modalidad" id="inlineRadio3" value="3">
-                                <label class="form-check-label" for="inlineRadio3">AMBAS</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input wire:model="modalidad" class="form-check-input" type="radio" name="modalidad" id="inlineRadio4" value="4">
-                                <label class="form-check-label" for="inlineRadio4">PRESENCIAL EN GRUPO (VARIAS PERSONAS)</label>
-                            </div>
+                @if (auth()->user()->role('paciente'))
+                    <div class="row px-3">
+                        <div class="col-xl-4 col-lg-12 col-md-12 col-sm-12 mb-3">
+                            <label for="comoSeEntero" >¿COMO TE ENTERASTE DE SIEMPRE JUNTOS?</label>
+                            <select class="form-select" aria-label="Default select example" wire:model="comoSeEntero">
+                                <option selected>SELECCIONE</option>
+                                @foreach ($enteros as $item)
+                                    <option value="{{ $item->id }}">{{ $item->nombre }}</option>
+                                @endforeach
+                            </select>
                         </div>
                     </div>
-                </div>                            
-                <div class="row px-3">
-                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-3">
-                        <label for="motivo" >MOTIVO CONSULTA</label>
-                        <p>Lee detenidamente cada una de las opciones y selecciona la opción con las que más se identifique tu motivo de consulta</p>
-                        <select class="form-select" aria-label="Default select example" wire:model="motivo">
-                            <option selected>SELECCIONE</option>
-                            @foreach ($motivos as $item)
-                                <option value="{{ $item->id }}">{{ $item->nombre }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                </div>
-                <div class="row px-3">
-                    <div class="col-xl-6 col-lg-12 col-md-12 col-sm-12 mb-3">
-                        <label for="atencion_psicologica">¿HAS RECIBIDO ATENCIÓN PSICOLÓGICA O PSIQUIÁTRICA ANTERIORMENTE?</label>
-                        <div class="@error('atencion_psicologica') border border-danger rounded-3  @enderror">
-                            <div class="form-check form-check-inline">
-                                <input wire:model="atencion_psicologica" class="form-check-input" type="radio" name="atencion_psicologica" id="inlineRadio1" value="1">
-                                <label class="form-check-label" for="inlineRadio1">SI</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input wire:model="atencion_psicologica" class="form-check-input" type="radio" name="atencion_psicologica" id="inlineRadio2" value="0">
-                                <label class="form-check-label" for="inlineRadio2">NO</label>
+                    <div class="row px-3">
+                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-3">
+                            <label for="modalidad">MODALIDAD EN QUE PUEDE RECIBIR LA ATENCIÓN</label>
+                            <div class="@error('modalidad') border border-danger rounded-3  @enderror">
+                                <div class="form-check form-check-inline">
+                                    <input wire:model="modalidad" class="form-check-input" type="radio" name="modalidad" id="inlineRadio1" value="1">
+                                    <label class="form-check-label" for="inlineRadio1">PRESENCIAL</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input wire:model="modalidad" class="form-check-input" type="radio" name="modalidad" id="inlineRadio2" value="2">
+                                    <label class="form-check-label" for="inlineRadio2">ONLINE</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input wire:model="modalidad" class="form-check-input" type="radio" name="modalidad" id="inlineRadio3" value="3">
+                                    <label class="form-check-label" for="inlineRadio3">AMBAS</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input wire:model="modalidad" class="form-check-input" type="radio" name="modalidad" id="inlineRadio4" value="4">
+                                    <label class="form-check-label" for="inlineRadio4">PRESENCIAL EN GRUPO (VARIAS PERSONAS)</label>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-xl-6 col-lg-12 col-md-12 col-sm-12 mb-3">
-                        <label for="trastorno_psicologico">¿HAS SIDO DIAGNOSTICADO(A) CON ALGUNA CONDICIÓN O TRASTORNO PSICOLÓGICO O PSIQUIÁTRICO?</label>
-                        <div class="@error('trastorno_psicologico') border border-danger rounded-3  @enderror">
-                            <div class="form-check form-check-inline">
-                                <input wire:model="trastorno_psicologico" class="form-check-input" type="radio" name="trastorno_psicologico" id="inlineRadio1" value="1">
-                                <label class="form-check-label" for="inlineRadio1">SI</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input wire:model="trastorno_psicologico" class="form-check-input" type="radio" name="trastorno_psicologico" id="inlineRadio2" value="0">
-                                <label class="form-check-label" for="inlineRadio2">NO</label>
-                            </div>
+                    </div>                            
+                    <div class="row px-3">
+                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-3">
+                            <label for="motivo" >MOTIVO CONSULTA</label>
+                            <p>Lee detenidamente cada una de las opciones y selecciona la opción con las que más se identifique tu motivo de consulta</p>
+                            <select class="form-select" aria-label="Default select example" wire:model="motivo">
+                                <option selected>SELECCIONE</option>
+                                @foreach ($motivos as $item)
+                                    <option value="{{ $item->id }}">{{ $item->nombre }}</option>
+                                @endforeach
+                            </select>
                         </div>
                     </div>
-                    <div class="row">
-                        <div>
-                            <p>Por favor, cargue una foto de su cédula de identidad. Es importante verificar sus datos personales para poder ofrecerle la atención segura, confidencial y gratuita.</p>
-                            <div class="mb-4 d-flex justify-content-center">
-                                <img wire:ignore.self id="selectedImage" src="{{ $this->file ? asset($this->file) : asset('assets/img/cedula.jpg') }}" alt="example placeholder" style="width: 300px;" />
+                    <div class="row px-3">
+                        <div class="col-xl-6 col-lg-12 col-md-12 col-sm-12 mb-3">
+                            <label for="atencion_psicologica">¿HAS RECIBIDO ATENCIÓN PSICOLÓGICA O PSIQUIÁTRICA ANTERIORMENTE?</label>
+                            <div class="@error('atencion_psicologica') border border-danger rounded-3  @enderror">
+                                <div class="form-check form-check-inline">
+                                    <input wire:model="atencion_psicologica" class="form-check-input" type="radio" name="atencion_psicologica" id="inlineRadio1" value="1">
+                                    <label class="form-check-label" for="inlineRadio1">SI</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input wire:model="atencion_psicologica" class="form-check-input" type="radio" name="atencion_psicologica" id="inlineRadio2" value="0">
+                                    <label class="form-check-label" for="inlineRadio2">NO</label>
+                                </div>
                             </div>
-                            <div class="d-flex justify-content-center">
-                                <div data-mdb-ripple-init class="btn btn-primary btn-rounded">
-                                    <label class="form-label text-white m-1" for="customFile1">SUBIR IMAGEN</label>
-                                    <input wire:model="file" type="file" class="form-control d-none" id="customFile1" onchange="displaySelectedImage(event, 'selectedImage')" />
+                        </div>
+                        <div class="col-xl-6 col-lg-12 col-md-12 col-sm-12 mb-3">
+                            <label for="trastorno_psicologico">¿HAS SIDO DIAGNOSTICADO(A) CON ALGUNA CONDICIÓN O TRASTORNO PSICOLÓGICO O PSIQUIÁTRICO?</label>
+                            <div class="@error('trastorno_psicologico') border border-danger rounded-3  @enderror">
+                                <div class="form-check form-check-inline">
+                                    <input wire:model="trastorno_psicologico" class="form-check-input" type="radio" name="trastorno_psicologico" id="inlineRadio1" value="1">
+                                    <label class="form-check-label" for="inlineRadio1">SI</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input wire:model="trastorno_psicologico" class="form-check-input" type="radio" name="trastorno_psicologico" id="inlineRadio2" value="0">
+                                    <label class="form-check-label" for="inlineRadio2">NO</label>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>  
+                @endif
+                @if (auth()->user()->role('especialista'))
+                    <div class="row">
+                        <div class="col-xl-4 col-lg-12 col-md-12 col-sm-12 mb-3">
+                            <label for="especialidad" >ESPECIALIZACIÓN</label>
+                            <select class="form-select" aria-label="Default select example" wire:model="especialidad">
+                                <option selected>SELECCIONE</option>
+                                @foreach ($especialidades as $item)
+                                    <option value="{{ $item->id }}">{{ $item->nombre }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>                    
+                @endif
+                <div class="row px-3">
+                    <div>
+                        <p>Por favor, cargue una foto de su cédula de identidad. Es importante verificar sus datos personales para poder ofrecerle la atención segura, confidencial y gratuita.</p>
+                        <div class="mb-4 d-flex justify-content-center">
+                            <img wire:ignore.self id="selectedImage" src="{{ $this->file ? asset($this->file) : asset('assets/img/cedula.jpg') }}" alt="example placeholder" style="width: 300px;" />
+                        </div>
+                        <div class="d-flex justify-content-center">
+                            <div data-mdb-ripple-init class="btn btn-primary btn-rounded">
+                                <label class="form-label text-white m-1" for="customFile1">SUBIR IMAGEN</label>
+                                <input wire:model="file" type="file" class="form-control d-none" id="customFile1" onchange="displaySelectedImage(event, 'selectedImage')" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </form>
         </div>
     </div>

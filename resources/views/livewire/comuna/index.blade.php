@@ -54,6 +54,50 @@
                 </div>
                 <div class="modal-body">
                     <form>
+                        <div class="row">
+                            <div class="col-xl-12 col-sm-12 mb-3">
+                                <label for="estado">ESTADO</label>
+                                <div class="@error('estado') border border-danger rounded-3 @enderror">
+                                    <select class="form-select" aria-label="Default select example" wire:model.live="estado">
+                                        <option selected>SELECCIONE</option>
+                                        @foreach ($estados as $item)
+                                            <option value="{{ $item->id }}">{{ $item->nombre }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                @error('estado') <div class="text-danger">{{ $message }}</div> @enderror
+                            </div>
+                            <!-- #region MUNICIPIOS-->
+                                @if (!is_null($municipios))
+                                    <div class="col-xl-12 col-sm-12 mb-3">
+                                        <label for="municipio">MUNICIPIO</label>
+                                        <div class="@error('municipio') border border-danger rounded-3 @enderror">
+                                            <select class="form-select" aria-label="Default select example" wire:model.live="municipio">
+                                                <option selected>SELECCIONE</option>
+                                                @foreach ($municipios as $item)
+                                                    <option value="{{ $item->id }}">{{ $item->nombre }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        @error('municipio') <div class="text-danger">{{ $message }}</div> @enderror
+                                    </div>
+                                @endif
+                            <!-- #region PARROQUIAS-->
+                                @if (!is_null($parroquias))
+                                    <div class="col-xl-12 col-sm-12 mb-3">
+                                        <label for="parroquia">PARROQUIA</label>
+                                        <div class="@error('parroquia') border border-danger rounded-3 @enderror">
+                                            <select class="form-select" aria-label="Default select example" wire:model.live="parroquia">
+                                                <option selected>SELECCIONE</option>
+                                                @foreach ($parroquias as $item)
+                                                    <option value="{{ $item->id }}">{{ $item->nombre }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        @error('parroquia') <div class="text-danger">{{ $message }}</div> @enderror
+                                    </div>
+                                @endif
+                        </div>
                         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-3">
                             <label for="especialista">NOMBRE</label>
                             <input wire:model="comunaNombre" type="text" class="form-control" id="comunaNombre" name="comunaNombre">
