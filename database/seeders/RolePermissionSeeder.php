@@ -13,7 +13,7 @@ class RolePermissionSeeder extends Seeder
     public function run(): void
     {
         $adminRole = Role::create(['name' => 'admin']);
-        $doctorRole = Role::create(['name' => 'doctor']);
+        $especialistaRole = Role::create(['name' => 'especialista']);
         $pacienteRole = Role::create(['name' => 'paciente']);
 
         $permission = Permission::create(['name' => 'ver pacientes']);
@@ -31,15 +31,31 @@ class RolePermissionSeeder extends Seeder
         $permission = Permission::create(['name' => 'editar doctor']);
         $permission = Permission::create(['name' => 'eliminar doctor']);
 
-        $AdminUser = User::find(1);
-        $AdminUser->assignRole('admin');
-        $permissionAdminUser = Permission::query()->pluck('name');
-        $adminRole->syncPermissions($permissionAdminUser);
+        $permission = Permission::create(['name' => 'otros datos']);
+        $permission = Permission::create(['name' => 'especialidad']);
 
-        $doctorRole->givePermissionTo(['ver pacientes', 'crear pacientes', 'editar pacientes']);
+        // $AdminUser = User::find(1);
+        // $AdminUser->assignRole('admin');
+        // $permissionAdminUser = Permission::query()->pluck('name');
+        // $adminRole->syncPermissions($permissionAdminUser);
+        $especialistaRole->givePermissionTo([
+            'ver pacientes',
+            'crear pacientes',
+            'editar pacientes',
+            'eliminar pacientes',
+            'ver usuario',
+            'crear usuario',
+            'editar usuario',
+            'eliminar usuario',
+            'ver doctor',
+            'crear doctor',
+            'editar doctor',
+            'eliminar doctor',
+        ]);
+        $especialistaRole->givePermissionTo(['ver pacientes', 'especialidad']);
 
         // $DoctorUser = User::find(2);
-        //$DoctorUser->assignRole('doctor');
+        // $DoctorUser->assignRole('doctor');
         // $permissionDoctorUser = Permission::whereIn('name', ['ver pacientes', 'crear pacientes', 'editar pacientes'])->pluck('name');
         // $doctorRole->syncPermissions($permissionDoctorUser);
     }
