@@ -24,7 +24,6 @@
                 </a>
             </li>
             @can('ver usuario')
-            
                 <li class="nav-item pb-2">
                     <a class="nav-link {{ Route::currentRouteName() == 'usuarios' ? 'active' : '' }}" href="{{ route('usuarios') }}">
                         <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
@@ -64,6 +63,16 @@
                 <li class="nav-item mt-2">
                     <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">CONFIGURACIÓN</h6>
                 </li>
+                @if(auth()->user()->hasRole('admin'))
+                    <li class="nav-item pb-2">
+                        <a class="nav-link {{ Route::currentRouteName() == 'consejo-comunal' ? 'active' : '' }}" href="{{ route('consejo-comunal') }}">
+                            <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+                                <span class="material-icons {{ in_array(request()->route()->getName(),['consejo-comunal']) ? 'text-dark' : 'text-white' }}">location_city</span>
+                            </div>
+                            <span class="nav-link-text ms-1"><b>ESPECIALISTAS</b></span>
+                        </a>
+                    </li>
+                @endif
                 <li class="nav-item pb-2">
                     <a class="nav-link {{ Route::currentRouteName() == 'especializacion' ? 'active' : '' }}" href="{{ route('especializacion') }}">
                         <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">

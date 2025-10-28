@@ -28,7 +28,7 @@
                                         <td><div><img src="../assets/img/team-2.jpg" class="avatar avatar-sm me-3"></div></td>
                                         <td>
                                             <div>
-                                                <div class="text-xs font-weight-bold mb-0"><h6 class="mb-0 text-sm">{{ $item->nombre }}</h6><p class="text-xs text-secondary mb-0">{{ $item->email }}</p></div>
+                                                <div class="text-xs font-weight-bold mb-0"><h6 class="mb-0 text-sm">{{ $item->especialista->nombre }}</h6><p class="text-xs text-secondary mb-0">{{ $item->email }}</p></div>
                                                 <p class="text-xs text-secondary">{{$item->tlf_contacto}}</p>
                                             </div>
                                         </td>
@@ -36,9 +36,9 @@
                                             <p class="text-xs font-weight-bold mb-0">{{ isset($item->especializacion->nombre) ? $item->especializacion->nombre : 'Sin especialización' }}</p>
                                             <p class="text-xs text-secondary">Organization</p>
                                         </td>
-                                        <td class="align-middle text-center text-sm"><span class="badge {{ $item->is_active ? 'badge-sm bg-gradient-success' : 'badge-sm bg-gradient-danger' }}">{{ $item->is_active ? 'activo' : 'inactivo' }}</span></td>
+                                        <td class="align-middle text-center text-sm"><span class="badge {{ $item->especialista->is_active ? 'badge-sm bg-gradient-success' : 'badge-sm bg-gradient-danger' }}">{{ $item->especialista->is_active ? 'activo' : 'inactivo' }}</span></td>
                                         <td class="text-center">
-                                            <a href="" class="text-success font-weight-bold text-xs" data-bs-toggle="modal" data-bs-target="#ModalEspecialista" data-toggle="tooltip" data-original-title="Editar user"><span class="material-icons">edit</span></a>
+                                            <a href="" wire:click="editarEspecialista('{{ $item->id }}')" class="text-success font-weight-bold text-xs" data-bs-toggle="modal" data-bs-target="#ModalEspecialista" data-toggle="tooltip" data-original-title="Editar user"><span class="material-icons">edit</span></a>
                                             <a href="" wire:click="verPacientes('{{ $item->id }}')" class="text-info font-weight-bold text-xs" data-bs-toggle="modal" data-bs-target="#ModalPacientes" data-toggle="tooltip" data-original-title="Ver Pacientes"><span class="material-icons">recent_actors</span></a>
                                         </td>
                                     </tr>
@@ -57,7 +57,7 @@
             <div class="modal-content">
                 <div class="modal-header bg-danger">
                     <h3 class="modal-title fs-5 mt-4 text-2xl text-cyan-400 font-bold text-center text-white">REGISTRAR UN ESPECIALISTA</h3>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button wire:click="limpiarCampos()" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <form wire:submit="guardar" action="#" enctype="multipart/form-data" method="POST" role="form text-left">
@@ -269,7 +269,7 @@
                             <div>
                                 <p>Por favor, cargue una foto de su cédula de identidad. Es importante verificar sus datos personales para poder ofrecerle la atención segura, confidencial y gratuita.</p>
                                 <div class="mb-4 d-flex justify-content-center">
-                                    <img wire:ignore.self id="selectedImage" src="{{ $this->file ? asset($this->file) : asset('assets/img/cedula.jpg') }}" alt="example placeholder" style="width: 300px;" />
+                                    <img {{ !$this->file ? 'wire.ingore' : '' }} id="selectedImage" src="{{ $this->file ? asset($this->file) : asset('assets/img/cedula.jpg') }}" alt="example placeholder" style="width: 300px;" />
                                 </div>
                                 <div class="d-flex justify-content-center">
                                     <div data-mdb-ripple-init class="btn btn-primary btn-rounded">
@@ -352,6 +352,8 @@
     function displaySelectedImage(event, elementId) {
         const selectedImage = document.getElementById(elementId);
         const fileInput = event.target;
+
+        selectedImage.setAttribute('wire:ignore.self', '');
 
         if (fileInput.files && fileInput.files[0]) {
             const reader = new FileReader();

@@ -38,7 +38,7 @@ class RolePermissionSeeder extends Seeder
         // $AdminUser->assignRole('admin');
         // $permissionAdminUser = Permission::query()->pluck('name');
         // $adminRole->syncPermissions($permissionAdminUser);
-        $especialistaRole->givePermissionTo([
+        $adminRole->givePermissionTo([
             'ver pacientes',
             'crear pacientes',
             'editar pacientes',

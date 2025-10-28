@@ -14,12 +14,8 @@ class UserSeeder extends Seeder
 {
     public function run(): void
     {
-        User::insert([
-            ['name' => 'ADMINISTRADOR', 'email' => 'admin@email.com','password' => bcrypt('21246813'),'role' => 'admin','especialista_id' => 1,],
-        ]);
-        User::insert([
-            ['name' => 'Juan Perez', 'email' => 'caracas@email.com','password' => bcrypt('caracas'), 'role' => 'especialista', 'especialista_id' => 2, ],
-        ]);
+        User::create(['name' => 'ADMINISTRADOR', 'email' => 'admin@email.com','password' => bcrypt('21246813'),'role' => 'admin','especialista_id' => 1])->assignRole('admin');
+        User::create(['name' => 'Juan Perez', 'email' => 'caracas@email.com','password' => bcrypt('caracas'), 'role' => 'especialista', 'especialista_id' => 2])->assignRole('especialista');
 
     }
 }

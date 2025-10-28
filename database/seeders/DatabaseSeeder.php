@@ -40,8 +40,8 @@ class DatabaseSeeder extends Seeder
             ProfesionSeeder::class,
             EspecialistaSeeder::class,
             PacienteSeeder::class,
-            UserSeeder::class,
-            RolePermissionSeeder::class
+            RolePermissionSeeder::class,
+            UserSeeder::class
         ]);
     }
 }

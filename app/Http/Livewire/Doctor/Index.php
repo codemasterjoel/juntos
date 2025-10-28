@@ -27,14 +27,13 @@ class Index extends Component
     public $estados, $municipios, $parroquias, $comunas, $centros, $consejoComunales, $paises, $sexos, $generos, $especialidades = null;
     public $estado, $municipio, $parroquia, $comuna, $consejoComunal, $pais = null;
     public $cedula, $nombre, $tlf_contacto, $tlf_emergencia, $edad, $genero, $sexo, $fechaNac, $direccion, $comoSeEntero, $modalidad, $file, $foto, $especialidad, $name, $email, $password = null;
-    public $especialistas, $pacientes = null;
+    public $especialistas, $pacientes, $user, $usuario, $idUsuario, $idEspecialista = null;
 
     public function mount()
     {
-        $this->especialistas = Especialista::all();
+        $this->especialistas = User::all();
         $this->pais = "VE";
     }
-
     public function render()
     {
         $this->estados = Estado::all();
@@ -44,7 +43,6 @@ class Index extends Component
         $this->especialidades = Especializacion::all();
         return view('livewire.doctor.index');
     }
-
     public function updatedEstado($id)
     {
         $this->municipio = null;
@@ -76,7 +74,7 @@ class Index extends Component
     public function guardar()
     {
         $file = $this->file->store('cedula', 'public_path');
-        $especialista = Especialista::create([
+        $especialista = Especialista::updateOrCreate(['id' => $this->idEspecialista], [
             'file' => $file,
             'cedula' => $this->cedula,
             'nombre' => $this->nombre,
@@ -96,7 +94,7 @@ class Index extends Component
             'especializacion_id' => $this->especialidad,
         ]);
 
-        $user = User::create([
+        $user = User::updateOrCreate(['id' => $this->idUsuario], [
             'name' => $this->name,
             'email' => $this->email,
             'password' => Hash::make($this->password),
@@ -136,9 +134,43 @@ class Index extends Component
         $this->name = null;
         $this->email = null;
         $this->password = null;
+        $this->idUsuario = null;
+        $this->idEspecialista = null;
     }
     public function verPacientes($id)
     {
         $this->pacientes = Paciente::where('especialista_id', $id)->get();
+    }
+    public function editarEspecialista($id)
+    {
+        //dd($id);
+        $this->usuario = User::where('id', $id)->get()->first();
+        //dd( $this->usuario );
+        $this->idEspecialista = $this->usuario->especialista->id;
+        $this->idUsuario = $this->usuario->id;
+        $this->cedula = $this->usuario->especialista->cedula;
+        $this->nombre = $this->usuario->especialista->nombre;
+        $this->tlf_contacto = $this->usuario->especialista->tlf_contacto;
+        $this->tlf_emergencia = $this->usuario->especialista->tlf_emergencia;
+        $this->genero = $this->usuario->especialista->genero_id;
+        $this->sexo = $this->usuario->especialista->sexo_id;
+        $this->fechaNac = $this->usuario->especialista->fecha_nac;
+        $this->direccion = $this->usuario->especialista->direccion;
+        $this->especialidad = $this->usuario->especialista->especializacion_id;
+        $this->estado = $this->usuario->especialista->estado_id;
+        $this->municipio = $this->usuario->especialista->municipio_id;
+        $this->parroquia = $this->usuario->especialista->parroquia_id;
+        $this->comuna = $this->usuario->especialista->comuna_id;
+        $this->consejoComunal = $this->usuario->especialista->consejo_comunal_id;
+        $this->pais = $this->usuario->especialista->pais_id;
+        $this->edad = Carbon::parse( $this->usuario->especialista->fecha_nac )->age;
+        $this->municipios = Municipio::where('estado_id', $this->estado)->get();
+        $this->parroquias = Parroquia::where('municipio_id', $this->municipio)->get();
+        $this->comunas = Comuna::where('parroquia_id', $this->parroquia)->get();
+        $this->consejoComunales = ConsejoComunal::where('comuna_id', $this->comuna)->get();
+        $this->file = $this->usuario->especialista->file;
+
+        $this->name = $this->usuario->name;
+        $this->email = $this->usuario->email;
     }
 }
