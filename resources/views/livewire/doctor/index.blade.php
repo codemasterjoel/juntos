@@ -22,24 +22,24 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($especialistas as $item)
+                                @foreach ($especialistas as $doctor)
                                     <tr>
                                         <td><p class=" text-center mb-0">{{ $loop->iteration }}</p></td>
                                         <td><div><img src="../assets/img/team-2.jpg" class="avatar avatar-sm me-3"></div></td>
                                         <td>
                                             <div>
-                                                <div class="text-xs font-weight-bold mb-0"><h6 class="mb-0 text-sm">{{ $item->especialista->nombre }}</h6><p class="text-xs text-secondary mb-0">{{ $item->email }}</p></div>
-                                                <p class="text-xs text-secondary">{{$item->tlf_contacto}}</p>
+                                                <div class="text-xs font-weight-bold mb-0"><h6 class="mb-0 text-sm">{{ $doctor->especialista->nombre }}</h6><p class="text-xs text-secondary mb-0">{{ $doctor->email ? $doctor->email : 'Sin email' }}</p></div>
+                                                <p class="text-xs text-secondary">{{$doctor->especialista->tlf_contacto}}</p>
                                             </div>
                                         </td>
                                         <td>
-                                            <p class="text-xs font-weight-bold mb-0">{{ isset($item->especializacion->nombre) ? $item->especializacion->nombre : 'Sin especialización' }}</p>
+                                            <p class="text-xs font-weight-bold mb-0">{{ isset($doctor->especialista->especializacion->nombre) ? $doctor->especialista->especializacion->nombre : 'Sin especialización' }}</p>
                                             <p class="text-xs text-secondary">Organization</p>
                                         </td>
-                                        <td class="align-middle text-center text-sm"><span class="badge {{ $item->especialista->is_active ? 'badge-sm bg-gradient-success' : 'badge-sm bg-gradient-danger' }}">{{ $item->especialista->is_active ? 'activo' : 'inactivo' }}</span></td>
+                                        <td class="align-middle text-center text-sm"><span class="badge {{ $doctor->especialista->is_active ? 'badge-sm bg-gradient-success' : 'badge-sm bg-gradient-danger' }}">{{ $doctor->especialista->is_active ? 'activo' : 'inactivo' }}</span></td>
                                         <td class="text-center">
-                                            <a href="" wire:click="editarEspecialista('{{ $item->id }}')" class="text-success font-weight-bold text-xs" data-bs-toggle="modal" data-bs-target="#ModalEspecialista" data-toggle="tooltip" data-original-title="Editar user"><span class="material-icons">edit</span></a>
-                                            <a href="" wire:click="verPacientes('{{ $item->id }}')" class="text-info font-weight-bold text-xs" data-bs-toggle="modal" data-bs-target="#ModalPacientes" data-toggle="tooltip" data-original-title="Ver Pacientes"><span class="material-icons">recent_actors</span></a>
+                                            <a href="" wire:click="editarEspecialista('{{ $doctor->id }}')" class="text-success font-weight-bold text-xs" data-bs-toggle="modal" data-bs-target="#ModalEspecialista" data-toggle="tooltip" data-original-title="Editar user"><span class="material-icons">edit</span></a>
+                                            <a href="" wire:click="verPacientes('{{ $doctor->id }}')" class="text-info font-weight-bold text-xs" data-bs-toggle="modal" data-bs-target="#ModalPacientes" data-toggle="tooltip" data-original-title="Ver Pacientes"><span class="material-icons">recent_actors</span></a>
                                         </td>
                                     </tr>
                                 @endforeach

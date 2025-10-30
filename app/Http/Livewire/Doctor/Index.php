@@ -99,7 +99,7 @@ class Index extends Component
             'email' => $this->email,
             'password' => Hash::make($this->password),
             'especialista_id' => $especialista->id,
-        ]);
+        ])->assignRole('especialista');
 
         session()->flash('message', 'Doctor registrado exitosamente.');
         return redirect()->to('/doctor');

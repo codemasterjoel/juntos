@@ -39,7 +39,7 @@ class Index extends Component
     ];
 
     public function mount() { 
-        if (auth()->user()->role('admin') || auth()->user()->role('especialista')) {
+        if (auth()->user()->hasRole('admin') || auth()->user()->hasRole('especialista')) {
             $this->user = auth()->user();
                 $this->cedula = $this->user->especialista->cedula;
                 $this->nombre = $this->user->especialista->nombre;

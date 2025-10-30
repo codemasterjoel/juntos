@@ -31,6 +31,31 @@ class RolePermissionSeeder extends Seeder
         $permission = Permission::create(['name' => 'editar doctor']);
         $permission = Permission::create(['name' => 'eliminar doctor']);
 
+        $permission = Permission::create(['name' => 'ver especializaciones']);
+        $permission = Permission::create(['name' => 'crear especializaciones']);
+        $permission = Permission::create(['name' => 'editar especializaciones']);
+        $permission = Permission::create(['name' => 'eliminar especializaciones']);
+
+        $permission = Permission::create(['name' => 'ver entero']);
+        $permission = Permission::create(['name' => 'crear entero']);
+        $permission = Permission::create(['name' => 'editar entero']);
+        $permission = Permission::create(['name' => 'eliminar entero']);
+
+        $permission = Permission::create(['name' => 'ver motivo']);
+        $permission = Permission::create(['name' => 'crear motivo']);
+        $permission = Permission::create(['name' => 'editar motivo']);
+        $permission = Permission::create(['name' => 'eliminar motivo']);
+
+        $permission = Permission::create(['name' => 'ver comuna']);
+        $permission = Permission::create(['name' => 'crear comuna']);
+        $permission = Permission::create(['name' => 'editar comuna']);
+        $permission = Permission::create(['name' => 'eliminar comuna']);
+
+        $permission = Permission::create(['name' => 'ver consejo-comunal']);
+        $permission = Permission::create(['name' => 'crear consejo-comunal']);
+        $permission = Permission::create(['name' => 'editar consejo-comunal']);
+        $permission = Permission::create(['name' => 'eliminar consejo-comunal']);
+
         $permission = Permission::create(['name' => 'otros datos']);
         $permission = Permission::create(['name' => 'especialidad']);
 
@@ -51,6 +76,26 @@ class RolePermissionSeeder extends Seeder
             'crear doctor',
             'editar doctor',
             'eliminar doctor',
+            'ver especializaciones',
+            'crear especializaciones',
+            'editar especializaciones',
+            'eliminar especializaciones',
+            'ver entero',
+            'crear entero',
+            'editar entero',
+            'eliminar entero',
+            'ver motivo',
+            'crear motivo',
+            'editar motivo',
+            'eliminar motivo',
+            'ver comuna',
+            'crear comuna',
+            'editar comuna',
+            'eliminar comuna',
+            'ver consejo-comunal',
+            'crear consejo-comunal',
+            'editar consejo-comunal',
+            'eliminar consejo-comunal',
         ]);
         $especialistaRole->givePermissionTo(['ver pacientes', 'especialidad']);
 

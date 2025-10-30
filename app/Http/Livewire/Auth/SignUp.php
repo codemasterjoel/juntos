@@ -83,11 +83,9 @@ class SignUp extends Component
             'name' => $this->name,
             'email' => $this->email,
             'password' => Hash::make($this->password),
-            
         ]);
 
-        $user->assignRole('paciente');
-
+        $user->assignRole('especialista');
         auth()->login($user);
 
         return redirect('/dashboard');

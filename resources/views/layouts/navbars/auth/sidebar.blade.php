@@ -34,16 +34,7 @@
                     </a>
                 </li>
             @endcan
-            @can('ver doctor')
-                <li class="nav-item pb-2">
-                    <a class="nav-link {{ Route::currentRouteName() == 'doctor' ? 'active' : '' }}" href="{{ route('doctor') }}">
-                        <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
-                            <span class="material-icons {{ in_array(request()->route()->getName(),['doctor']) ? 'text-dark' : 'text-white' }}">psychology</span>
-                        </div>
-                        <span class="nav-link-text ms-1"><b>ESPECIALISTAS</b></span>
-                    </a>
-                </li>
-            @endcan
+            @can('ver pacientes')
                 <li class="nav-item pb-2">
                     <a class="nav-link {{ Route::currentRouteName() == 'paciente' ? 'active' : '' }}" href="{{ route('paciente') }}">
                         <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
@@ -52,6 +43,7 @@
                         <span class="nav-link-text ms-1"><b>PACIENTES</b></span>
                     </a>
                 </li>
+            @endcan
                 <li class="nav-item pb-2">
                     <a class="nav-link {{ Route::currentRouteName() == 'citas' ? 'active' : '' }}" href="{{ route('citas') }}">
                         <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
@@ -63,56 +55,67 @@
                 <li class="nav-item mt-2">
                     <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">CONFIGURACIÓN</h6>
                 </li>
-                @if(auth()->user()->hasRole('admin'))
+                @can('ver doctor')
+                    <li class="nav-item pb-2">
+                        <a class="nav-link {{ Route::currentRouteName() == 'doctor' ? 'active' : '' }}" href="{{ route('doctor') }}">
+                            <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+                                <span class="material-icons {{ in_array(request()->route()->getName(),['doctor']) ? 'text-dark' : 'text-white' }}">psychology</span>
+                            </div>
+                            <span class="nav-link-text ms-1"><b>ESPECIALISTAS</b></span>
+                        </a>
+                    </li>
+                @endcan
+
+                @can('ver especializaciones')
+                    <li class="nav-item pb-2">
+                        <a class="nav-link {{ Route::currentRouteName() == 'especializacion' ? 'active' : '' }}" href="{{ route('especializacion') }}">
+                            <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+                                <span class="material-icons {{ in_array(request()->route()->getName(),['especializacion']) ? 'text-dark' : 'text-white' }}">school</span>
+                            </div>
+                            <span class="nav-link-text ms-1"><b>ESPECIALIZACIONES</b></span>
+                        </a>
+                    </li>
+                @endcan
+                @can('ver entero')
+                    <li class="nav-item pb-2">
+                        <a class="nav-link {{ Route::currentRouteName() == 'entero' ? 'active' : '' }}" href="{{ route('entero') }}">
+                            <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+                                <span class="material-icons {{ in_array(request()->route()->getName(),['entero']) ? 'text-dark' : 'text-white' }}">connect_without_contact</span>
+                            </div>
+                            <span class="nav-link-text ms-1"><b>COMO SE ENTERO</b></span>
+                        </a>
+                    </li>
+                @endcan
+                @can('ver motivo')
+                    <li class="nav-item pb-2">
+                        <a class="nav-link {{ Route::currentRouteName() == 'motivo' ? 'active' : '' }}" href="{{ route('motivo') }}">
+                            <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+                                <span class="material-icons {{ in_array(request()->route()->getName(),['motivo']) ? 'text-dark' : 'text-white' }}">psychology_alt</span>
+                            </div>
+                            <span class="nav-link-text ms-1"><b>MOTIVO DE CONSULTA</b></span>
+                        </a>
+                    </li>
+                @endcan
+                @can('ver comuna')
+                    <li class="nav-item pb-2">
+                        <a class="nav-link {{ Route::currentRouteName() == 'comuna' ? 'active' : '' }}" href="{{ route('comuna') }}">
+                            <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+                                <span class="material-icons {{ in_array(request()->route()->getName(),['comuna']) ? 'text-dark' : 'text-white' }}">diversity_1</span>
+                            </div>
+                        <span class="nav-link-text ms-1"><b>COMUNA</b></span>
+                    </a>
+                </li>
+                @endcan
+                @can('ver consejo-comunal')
                     <li class="nav-item pb-2">
                         <a class="nav-link {{ Route::currentRouteName() == 'consejo-comunal' ? 'active' : '' }}" href="{{ route('consejo-comunal') }}">
                             <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                                 <span class="material-icons {{ in_array(request()->route()->getName(),['consejo-comunal']) ? 'text-dark' : 'text-white' }}">location_city</span>
                             </div>
-                            <span class="nav-link-text ms-1"><b>ESPECIALISTAS</b></span>
+                            <span class="nav-link-text ms-1"><b>CONSEJO COMUNAL</b></span>
                         </a>
                     </li>
-                @endif
-                <li class="nav-item pb-2">
-                    <a class="nav-link {{ Route::currentRouteName() == 'especializacion' ? 'active' : '' }}" href="{{ route('especializacion') }}">
-                        <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
-                            <span class="material-icons {{ in_array(request()->route()->getName(),['especializacion']) ? 'text-dark' : 'text-white' }}">school</span>
-                        </div>
-                        <span class="nav-link-text ms-1"><b>ESPECIALIZACIONES</b></span>
-                    </a>
-                </li>
-                <li class="nav-item pb-2">
-                    <a class="nav-link {{ Route::currentRouteName() == 'entero' ? 'active' : '' }}" href="{{ route('entero') }}">
-                        <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
-                            <span class="material-icons {{ in_array(request()->route()->getName(),['entero']) ? 'text-dark' : 'text-white' }}">connect_without_contact</span>
-                        </div>
-                        <span class="nav-link-text ms-1"><b>COMO SE ENTERO</b></span>
-                    </a>
-                </li>
-                <li class="nav-item pb-2">
-                    <a class="nav-link {{ Route::currentRouteName() == 'motivo' ? 'active' : '' }}" href="{{ route('motivo') }}">
-                        <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
-                            <span class="material-icons {{ in_array(request()->route()->getName(),['motivo']) ? 'text-dark' : 'text-white' }}">psychology_alt</span>
-                        </div>
-                        <span class="nav-link-text ms-1"><b>MOTIVO DE CONSULTA</b></span>
-                    </a>
-                </li>
-                <li class="nav-item pb-2">
-                    <a class="nav-link {{ Route::currentRouteName() == 'comuna' ? 'active' : '' }}" href="{{ route('comuna') }}">
-                        <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
-                            <span class="material-icons {{ in_array(request()->route()->getName(),['comuna']) ? 'text-dark' : 'text-white' }}">diversity_1</span>
-                        </div>
-                        <span class="nav-link-text ms-1"><b>COMUNA</b></span>
-                    </a>
-                </li>
-                <li class="nav-item pb-2">
-                    <a class="nav-link {{ Route::currentRouteName() == 'consejo-comunal' ? 'active' : '' }}" href="{{ route('consejo-comunal') }}">
-                        <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
-                            <span class="material-icons {{ in_array(request()->route()->getName(),['consejo-comunal']) ? 'text-dark' : 'text-white' }}">location_city</span>
-                        </div>
-                        <span class="nav-link-text ms-1"><b>CONSEJO COMUNAL</b></span>
-                    </a>
-                </li>
+                @endcan
                 <li class="nav-item">
                     <a href="{{ url('logout') }}" class=" nav-link btn bg-gradient-danger active text-white" role="button" aria-pressed="true">Salir</a>
                 </li>
