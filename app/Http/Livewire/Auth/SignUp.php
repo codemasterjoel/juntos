@@ -39,7 +39,10 @@ class SignUp extends Component
         if(auth()->user()){
             redirect('/dashboard');
         }
-    $this->pais = "VE";
+
+        $this->fill(['email' => 'prueba@email.com', 'password' => '21246813', 'cedula' => '19491796', 'nombre' => 'Joel Zerpa', 'tlf_contacto' => '021214', 'tlf_emergencia'=>'02154545', 'genero'=>'2','name'=>'JoelZ',
+                     'sexo'=>'2', 'fechaNac'=>'1990-10-10', 'edad'=>'35', 'estado'=>'1', 'municipio'=>'101', 'parroquia'=>'10101', 'comuna'=>'1541', 'consejoComunal'=>'14257', 'direccion'=>'calle 10', 'comoSeEntero'=>'1', 'modalidad'=>'1', 'motivo'=>'1', 'atencion_psicologica'=>'1', 'trastorno_psicologico'=>'1']);
+        $this->pais = "VE";
     }
     public function register() {
         $this->validate();
@@ -76,7 +79,7 @@ class SignUp extends Component
             'atencion_psicologica' => $this->atencion_psicologica,
             'trastorno_psicologico' => $this->trastorno_psicologico,
             'is_active' => true,
-        ]);
+        ])->asignRole();
 
         $user = User::create([
             'paciente_id' => $paciente->id,

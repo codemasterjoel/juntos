@@ -24,6 +24,7 @@ class User extends Authenticatable
         'email',
         'password',
         'especialista_id',
+        'role',
     ];
     protected $casts = [
         'email_verified_at' => 'datetime',

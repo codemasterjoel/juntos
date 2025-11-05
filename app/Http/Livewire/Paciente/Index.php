@@ -47,4 +47,10 @@ class Index extends Component
     {
         $this->paciente = Paciente::find($id);
     }
+    public function limpiarCampos()
+    {
+        $this->especialista = null;
+        $this->paciente_id = null;
+        $this->paciente = null;
+    }
 }

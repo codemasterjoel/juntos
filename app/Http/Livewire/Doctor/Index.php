@@ -26,12 +26,11 @@ class Index extends Component
     use WithFileUploads;
     public $estados, $municipios, $parroquias, $comunas, $centros, $consejoComunales, $paises, $sexos, $generos, $especialidades = null;
     public $estado, $municipio, $parroquia, $comuna, $consejoComunal, $pais = null;
-    public $cedula, $nombre, $tlf_contacto, $tlf_emergencia, $edad, $genero, $sexo, $fechaNac, $direccion, $comoSeEntero, $modalidad, $file, $foto, $especialidad, $name, $email, $password = null;
-    public $especialistas, $pacientes, $user, $usuario, $idUsuario, $idEspecialista = null;
+    public $cedula, $nombre, $tlf_contacto, $tlf_emergencia, $edad, $genero, $sexo, $fechaNac, $direccion, $comoSeEntero, $modalidad, $file, $foto, $especialidad = null;
+    public $especialistas, $pacientes, $user, $usuario, $idUsuario, $idEspecialista, $doctor, $name, $email, $password = null;
 
     public function mount()
     {
-        $this->especialistas = User::all();
         $this->pais = "VE";
     }
     public function render()
@@ -41,6 +40,7 @@ class Index extends Component
         $this->generos = Genero::all();
         $this->sexos = Sexo::all();
         $this->especialidades = Especializacion::all();
+        $this->doctor = User::where('role', '=', 'especialista')->get();
         return view('livewire.doctor.index');
     }
     public function updatedEstado($id)
@@ -93,16 +93,20 @@ class Index extends Component
             'direccion' => $this->direccion,
             'especializacion_id' => $this->especialidad,
         ]);
-
-        $user = User::updateOrCreate(['id' => $this->idUsuario], [
-            'name' => $this->name,
-            'email' => $this->email,
-            'password' => Hash::make($this->password),
-            'especialista_id' => $especialista->id,
-        ]);
+        
+        if (is_null($this->idEspecialista)) {
+            $user = User::create([
+                'name' => $this->name,
+                'email' => $this->email,
+                'password' => Hash::make($this->password),
+                'especialista_id' => $especialista->id,
+                'role' => 'especialista',
+            ])->assignRole('especialista');
+        }
 
         session()->flash('message', 'Doctor registrado exitosamente.');
         return redirect()->to('/doctor');
+
     }
     public function limpiarCampos()
     {
@@ -131,10 +135,6 @@ class Index extends Component
         $this->file = null;
         $this->foto = null;
         $this->especialidad = null;
-        $this->name = null;
-        $this->email = null;
-        $this->password = null;
-        $this->idUsuario = null;
         $this->idEspecialista = null;
     }
     public function verPacientes($id)
@@ -147,7 +147,6 @@ class Index extends Component
         $this->usuario = User::where('id', $id)->get()->first();
         //dd( $this->usuario );
         $this->idEspecialista = $this->usuario->especialista->id;
-        $this->idUsuario = $this->usuario->id;
         $this->cedula = $this->usuario->especialista->cedula;
         $this->nombre = $this->usuario->especialista->nombre;
         $this->tlf_contacto = $this->usuario->especialista->tlf_contacto;
@@ -169,8 +168,5 @@ class Index extends Component
         $this->comunas = Comuna::where('parroquia_id', $this->parroquia)->get();
         $this->consejoComunales = ConsejoComunal::where('comuna_id', $this->comuna)->get();
         $this->file = $this->usuario->especialista->file;
-
-        $this->name = $this->usuario->name;
-        $this->email = $this->usuario->email;
     }
 }

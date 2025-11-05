@@ -22,18 +22,18 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($especialistas as $item)
+                                @foreach ($doctor as $item)
                                     <tr>
                                         <td><p class=" text-center mb-0">{{ $loop->iteration }}</p></td>
                                         <td><div><img src="../assets/img/team-2.jpg" class="avatar avatar-sm me-3"></div></td>
                                         <td>
                                             <div>
-                                                <div class="text-xs font-weight-bold mb-0"><h6 class="mb-0 text-sm">{{ $item->especialista->nombre }}</h6><p class="text-xs text-secondary mb-0">{{ $item->email }}</p></div>
-                                                <p class="text-xs text-secondary">{{$item->tlf_contacto}}</p>
+                                                <div class="text-xs font-weight-bold mb-0"><h6 class="mb-0 text-sm">{{ isset($item->especialista->nombre) ? $item->especialista->nombre : '' }}</h6><p class="text-xs text-secondary mb-0">{{ $item->email }}</p></div>
+                                                <p class="text-xs text-secondary">{{isset($item->especialista->tlf_contacto) ? $item->especialista->tlf_contacto : ''}}</p>
                                             </div>
                                         </td>
                                         <td>
-                                            <p class="text-xs font-weight-bold mb-0">{{ isset($item->especializacion->nombre) ? $item->especializacion->nombre : 'Sin especialización' }}</p>
+                                            <p class="text-xs font-weight-bold mb-0">{{ isset($item->especialista->especializacion->nombre) ? $item->especialista->especializacion->nombre : 'Sin especialización' }}</p>
                                             <p class="text-xs text-secondary">Organization</p>
                                         </td>
                                         <td class="align-middle text-center text-sm"><span class="badge {{ $item->especialista->is_active ? 'badge-sm bg-gradient-success' : 'badge-sm bg-gradient-danger' }}">{{ $item->especialista->is_active ? 'activo' : 'inactivo' }}</span></td>
@@ -122,31 +122,31 @@
                                 <input wire:model="edad" type="integer" name="edad" id="edad" class="form-control">
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-xl-6 col-lg-12 col-md-12 col-sm-12 mb-3">
-                                <label for="name">USUARIO</label>
-                                <div class="@error('name') border border-danger rounded-3  @enderror">
-                                    <input wire:model.live="name" type="text" class="form-control" placeholder="Name" aria-label="Name">
+                        @if (is_null($idEspecialista))
+                            <div class="row">
+                                <div class="col-xl-4 col-lg-12 col-md-12 col-sm-12 mb-3">
+                                    <label for="name">USUARIO</label>
+                                    <div class="@error('name') border border-danger rounded-3  @enderror">
+                                        <input wire:model.live="name" type="text" class="form-control" placeholder="Name" aria-label="Name">
+                                    </div>
+                                    @error('name') <div class="text-danger">{{ $message }}</div> @enderror
                                 </div>
-                                @error('name') <div class="text-danger">{{ $message }}</div> @enderror
-                            </div>
-                            <div class="col-xl-6 col-lg-12 col-md-12 col-sm-12 mb-3">
-                                <label for="email">CONTRASEÑA</label>
-                                <div class="@error('password') border border-danger rounded-3 @enderror">
-                                    <input wire:model.live="password" type="password" class="form-control" placeholder="Password" aria-label="Password" aria-describedby="password-addon">
+                                <div class="col-xl-4 col-sm-12 mb-3 mb-3">
+                                    <label for="email">CORREO</label>
+                                    <div class="@error('email') border border-danger rounded-3 @enderror">
+                                        <input wire:model.live="email" type="email" class="form-control" placeholder="Email" aria-label="Email">
+                                    </div>
+                                    @error('email') <div class="text-danger">{{ $message }}</div> @enderror
                                 </div>
-                                @error('password') <div class="text-danger">{{ $message }}</div> @enderror
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-xl-6 col-sm-12 mb-3 mb-3">
-                            <label for="email">CORREO</label>
-                            <div class="@error('email') border border-danger rounded-3 @enderror">
-                                <input wire:model.live="email" type="email" class="form-control" placeholder="Email" aria-label="Email">
-                            </div>
-                            @error('email') <div class="text-danger">{{ $message }}</div> @enderror
-                            </div>
-                        </div>
+                                <div class="col-xl-4 col-lg-12 col-md-12 col-sm-12 mb-3">
+                                    <label for="email">CONTRASEÑA</label>
+                                    <div class="@error('password') border border-danger rounded-3 @enderror">
+                                        <input wire:model.live="password" type="password" class="form-control" placeholder="Password" aria-label="Password" aria-describedby="password-addon">
+                                    </div>
+                                    @error('password') <div class="text-danger">{{ $message }}</div> @enderror
+                                </div>
+                            </div>              
+                        @endif
                         <div class="container">
                             <div class="row justify-content-center">
                                 <div class="col-lg-5 text-center mx-auto">
