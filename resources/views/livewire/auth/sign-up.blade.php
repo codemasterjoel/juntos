@@ -190,8 +190,8 @@
                             <!-- #region COMUNAS-->
                             <div class="row">
                                 @if (!is_null($comunas)) {{-- campo Parroquia --}}
-                                    <div class="col-xl-6 col-lg-12 col-md-12 col-sm-12">
-                                        <span for="comuna" >COMUNA O CIRCUITO COMUNAL</span>
+                                    <div class="col-xl-6 col-lg-12 col-md-12 col-sm-12 mb-3">
+                                        <label for="comuna" >COMUNA O CIRCUITO COMUNAL</label>
                                         <select class="form-select" aria-label="Default select example" wire:model.live="comuna">
                                             <option selected>SELECCIONE</option>
                                             @foreach ($comunas as $item)
@@ -202,8 +202,8 @@
                                     @error('comuna') <div class="text-danger">{{ $message }}</div> @enderror
                                 @endif
                                 @if (!is_null($consejoComunales)) {{-- campo Parroquia --}}
-                                    <div class="col-xl-6 col-lg-12 col-md-12 col-sm-12">
-                                        <span for="consejoComunal">CONSEJO COMUNAL</span>
+                                    <div class="col-xl-6 col-lg-12 col-md-12 col-sm-12 mb-3">
+                                        <label for="consejoComunal">CONSEJO COMUNAL</label>
                                         <select class="form-select" aria-label="Default select example" wire:model.live="consejoComunal">
                                             <option selected>SELECCIONE</option>
                                             @foreach ($consejoComunales as $item)

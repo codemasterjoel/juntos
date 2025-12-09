@@ -122,31 +122,31 @@
                                 <input wire:model="edad" type="integer" name="edad" id="edad" class="form-control">
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-xl-6 col-lg-12 col-md-12 col-sm-12 mb-3">
-                                <label for="name">USUARIO</label>
-                                <div class="@error('name') border border-danger rounded-3  @enderror">
-                                    <input wire:model.live="name" type="text" class="form-control" placeholder="Name" aria-label="Name">
+                        @if (is_null($idEspecialista))
+                            <div class="row">
+                                <div class="col-xl-4 col-lg-12 col-md-12 col-sm-12 mb-3">
+                                    <label for="name">USUARIO</label>
+                                    <div class="@error('name') border border-danger rounded-3  @enderror">
+                                        <input wire:model.live="name" type="text" class="form-control" placeholder="Name" aria-label="Name">
+                                    </div>
+                                    @error('name') <div class="text-danger">{{ $message }}</div> @enderror
                                 </div>
-                                @error('name') <div class="text-danger">{{ $message }}</div> @enderror
-                            </div>
-                            <div class="col-xl-6 col-lg-12 col-md-12 col-sm-12 mb-3">
-                                <label for="email">CONTRASEÑA</label>
-                                <div class="@error('password') border border-danger rounded-3 @enderror">
-                                    <input wire:model.live="password" type="password" class="form-control" placeholder="Password" aria-label="Password" aria-describedby="password-addon">
+                                <div class="col-xl-4 col-sm-12 mb-3 mb-3">
+                                    <label for="email">CORREO</label>
+                                    <div class="@error('email') border border-danger rounded-3 @enderror">
+                                        <input wire:model.live="email" type="email" class="form-control" placeholder="Email" aria-label="Email">
+                                    </div>
+                                    @error('email') <div class="text-danger">{{ $message }}</div> @enderror
                                 </div>
-                                @error('password') <div class="text-danger">{{ $message }}</div> @enderror
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-xl-6 col-sm-12 mb-3 mb-3">
-                            <label for="email">CORREO</label>
-                            <div class="@error('email') border border-danger rounded-3 @enderror">
-                                <input wire:model.live="email" type="email" class="form-control" placeholder="Email" aria-label="Email">
-                            </div>
-                            @error('email') <div class="text-danger">{{ $message }}</div> @enderror
-                            </div>
-                        </div>
+                                <div class="col-xl-4 col-lg-12 col-md-12 col-sm-12 mb-3">
+                                    <label for="email">CONTRASEÑA</label>
+                                    <div class="@error('password') border border-danger rounded-3 @enderror">
+                                        <input wire:model.live="password" type="password" class="form-control" placeholder="Password" aria-label="Password" aria-describedby="password-addon">
+                                    </div>
+                                    @error('password') <div class="text-danger">{{ $message }}</div> @enderror
+                                </div>
+                            </div>              
+                        @endif
                         <div class="container">
                             <div class="row justify-content-center">
                                 <div class="col-lg-5 text-center mx-auto">
