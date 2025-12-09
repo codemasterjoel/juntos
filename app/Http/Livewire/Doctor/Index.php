@@ -31,10 +31,7 @@ class Index extends Component
 
     public function mount()
     {
-<<<<<<< Updated upstream
-=======
         $this->especialistas = User::where('role', 'especialista')->get();
->>>>>>> Stashed changes
         $this->pais = "VE";
     }
     public function render()
