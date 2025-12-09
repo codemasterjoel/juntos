@@ -31,6 +31,10 @@ class Index extends Component
 
     public function mount()
     {
+<<<<<<< Updated upstream
+=======
+        $this->especialistas = User::where('role', 'especialista')->get();
+>>>>>>> Stashed changes
         $this->pais = "VE";
     }
     public function render()
@@ -99,6 +103,7 @@ class Index extends Component
             'email' => $this->email,
             'password' => Hash::make($this->password),
             'especialista_id' => $especialista->id,
+            'role' => 'especialista',
         ])->assignRole('especialista');
 
         session()->flash('message', 'Doctor registrado exitosamente.');

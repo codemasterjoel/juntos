@@ -24,6 +24,10 @@ class User extends Authenticatable
         'email',
         'password',
         'especialista_id',
+<<<<<<< Updated upstream
+=======
+        'paciente_id',
+>>>>>>> Stashed changes
         'role',
     ];
     protected $casts = [
